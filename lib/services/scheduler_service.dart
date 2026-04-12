@@ -35,8 +35,13 @@ class SchedulerService {
     return Duration(minutes: base + _random.nextInt(15));
   }
 
-  int calculateSessionCommitCount() {
-    // 2 to 5 commits per session is realistic
+  int calculateSessionCommitCount(SimulationMode mode, int remainingTarget) {
+    if (mode == SimulationMode.instant) {
+      // For instant mode, try to finish the remaining target in one pulse session
+      return remainingTarget;
+    }
+    
+    // For realistic mode, 2 to 5 commits per session is realistic
     return _random.nextInt(4) + 2;
   }
 }

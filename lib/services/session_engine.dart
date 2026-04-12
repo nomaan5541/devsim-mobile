@@ -3,6 +3,7 @@ import 'github_service.dart';
 import 'file_generator.dart';
 import 'logger_service.dart';
 import 'ai_service.dart';
+import '../models/commit_record.dart';
 
 class SessionEngine {
   final GitHubService _github = GitHubService();
@@ -17,6 +18,7 @@ class SessionEngine {
     required int commitCount,
     String? apiKey,
     Function(int)? onProgress,
+    Function(CommitRecord)? onCommit,
   }) async {
     _logger.log('Session Start: $commitCount pulses scheduled.', type: LogType.info);
 
@@ -67,6 +69,13 @@ class SessionEngine {
       );
 
       if (success) {
+        final record = CommitRecord(
+          path: path,
+          message: message,
+          timestamp: DateTime.now(),
+          isSuccess: true,
+        );
+        onCommit?.call(record);
         onProgress?.call(i + 1);
       } else {
         _logger.log('Session Sync Error. Terminating pulse.', type: LogType.error);

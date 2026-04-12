@@ -5,6 +5,7 @@ import 'logger_service.dart';
 import 'scheduler_service.dart';
 import 'session_engine.dart';
 import 'ai_service.dart';
+import '../models/commit_record.dart';
 
 class AppProvider extends ChangeNotifier {
   final GitHubService _github = GitHubService();
@@ -19,6 +20,8 @@ class AppProvider extends ChangeNotifier {
   SimulationMode _mode = SimulationMode.realistic;
   int _targetCommits = 10;
   int _completedCommits = 0;
+  int _failedCommits = 0;
+  final List<CommitRecord> _commitHistory = [];
 
   // AI Settings
   String? _googleApiKey;
@@ -31,8 +34,16 @@ class AppProvider extends ChangeNotifier {
   SimulationMode get mode => _mode;
   int get targetCommits => _targetCommits;
   int get completedCommits => _completedCommits;
+  int get failedCommits => _failedCommits;
+  List<CommitRecord> get commitHistory => List.unmodifiable(_commitHistory);
   String? get googleApiKey => _googleApiKey;
   bool get isAiEnabled => _isAiEnabled;
+
+  double get successRate {
+    final total = _completedCommits + _failedCommits;
+    if (total == 0) return 100.0;
+    return (_completedCommits / total) * 100;
+  }
 
   Future<void> initialize() async {
     _token = await _github.getToken();
@@ -62,6 +73,9 @@ class AppProvider extends ChangeNotifier {
     _repo = repo;
     _mode = mode;
     _targetCommits = target;
+    _completedCommits = 0;
+    _failedCommits = 0;
+    _commitHistory.clear();
     
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('last_owner', owner);
@@ -115,7 +129,12 @@ class AppProvider extends ChangeNotifier {
     while (_isRunning) {
       if (_token == null || _owner == null || _repo == null) break;
 
-      final sessionCommits = _scheduler.calculateSessionCommitCount();
+      // Calculate how many commits to run in this specific pulse session
+      final sessionCommits = _scheduler.calculateSessionCommitCount(
+        _mode, 
+        _targetCommits - _completedCommits
+      );
+      
       final actualToRun = (_completedCommits + sessionCommits > _targetCommits) 
         ? (_targetCommits - _completedCommits) 
         : sessionCommits;
@@ -135,6 +154,11 @@ class AppProvider extends ChangeNotifier {
         apiKey: _isAiEnabled ? _googleApiKey : null,
         onProgress: (done) {
           _completedCommits++;
+          notifyListeners();
+        },
+        onCommit: (record) {
+          _commitHistory.insert(0, record);
+          if (_commitHistory.length > 100) _commitHistory.removeLast();
           notifyListeners();
         },
       );

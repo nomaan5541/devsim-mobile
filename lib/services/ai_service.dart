@@ -37,23 +37,24 @@ class AiService {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         final text = data['candidates'][0]['content']['parts'][0]['text'] as String;
+        _logger.log('Intelligence Engine: Successfully generated pulse content.', type: LogType.success);
         // Clean up markdown block indicators if any
         return text.replaceAll('```python', '').replaceAll('```md', '').replaceAll('```json', '').replaceAll('```', '').trim();
       } else {
-        _logger.log('Gemini API Error: ${response.statusCode} - ${response.body}', type: LogType.error);
+        _logger.log('Intelligence Engine Error: API Key or Quota issue detected.', type: LogType.error);
         return null;
       }
     } catch (e) {
-      _logger.log('AI Service Exception: $e', type: LogType.error);
+      _logger.log('AI Service Internal Exception: $e', type: LogType.error);
       return null;
     }
   }
 
   String buildCodePrompt(String ext) {
-    return 'Generate a realistic $ext code snippet for a developer project. Do not include markdown formatting. Just the code.';
+    return 'Act as a Senior Software Engineer. Generate a sophisticated, professional $ext code snippet for an enterprise repository. Avoid placeholders. Provide only the code, no markdown or explanations.';
   }
 
   String buildAnalysisPrompt() {
-    return 'Generate a concise, professional log analysis report or status update for a software project. Keep it under 100 words.';
+    return 'Generate a professional, high-level technical analysis of a recent module deployment. Focus on performance metrics or architectural improvements. Keep it realistic and under 80 words.';
   }
 }
