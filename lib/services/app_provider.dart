@@ -22,6 +22,12 @@ class AppProvider extends ChangeNotifier {
   int _completedCommits = 0;
   int _failedCommits = 0;
   final List<CommitRecord> _commitHistory = [];
+  
+  // Premium Features
+  bool _enableProWorkflows = true;
+  TimeOfDay _startTime = const TimeOfDay(hour: 9, minute: 0);
+  TimeOfDay _endTime = const TimeOfDay(hour: 18, minute: 0);
+  final List<int> _heatmapData = List.filled(28, 0); // 4 weeks of data
 
   // AI Settings
   String? _googleApiKey;
@@ -36,6 +42,12 @@ class AppProvider extends ChangeNotifier {
   int get completedCommits => _completedCommits;
   int get failedCommits => _failedCommits;
   List<CommitRecord> get commitHistory => List.unmodifiable(_commitHistory);
+  
+  bool get enableProWorkflows => _enableProWorkflows;
+  TimeOfDay get startTime => _startTime;
+  TimeOfDay get endTime => _endTime;
+  List<int> get heatmapData => List.unmodifiable(_heatmapData);
+
   String? get googleApiKey => _googleApiKey;
   bool get isAiEnabled => _isAiEnabled;
 
@@ -52,6 +64,50 @@ class AppProvider extends ChangeNotifier {
     _isAiEnabled = prefs.getBool('is_ai_enabled') ?? false;
     _owner = prefs.getString('last_owner');
     _repo = prefs.getString('last_repo');
+    
+    // Load Premium Settings
+    _enableProWorkflows = prefs.getBool('enable_pro_workflows') ?? true;
+    final startHour = prefs.getInt('start_hour') ?? 9;
+    final startMin = prefs.getInt('start_min') ?? 0;
+    final endHour = prefs.getInt('end_hour') ?? 18;
+    final endMin = prefs.getInt('end_min') ?? 0;
+    _startTime = TimeOfDay(hour: startHour, minute: startMin);
+    _endTime = TimeOfDay(hour: endHour, minute: endMin);
+    
+    final heatmapString = prefs.getString('heatmap_data');
+    if (heatmapString != null) {
+      final decoded = jsonDecode(heatmapString) as List<dynamic>;
+      for (int i = 0; i < decoded.length && i < 28; i++) {
+        _heatmapData[i] = decoded[i] as int;
+      }
+    }
+
+    notifyListeners();
+  }
+
+  Future<void> setSchedule(TimeOfDay start, TimeOfDay end) async {
+    _startTime = start;
+    _endTime = end;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('start_hour', start.hour);
+    await prefs.setInt('start_min', start.minute);
+    await prefs.setInt('end_hour', end.hour);
+    await prefs.setInt('end_min', end.minute);
+    notifyListeners();
+  }
+
+  Future<void> toggleProWorkflows(bool enabled) async {
+    _enableProWorkflows = enabled;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('enable_pro_workflows', enabled);
+    notifyListeners();
+  }
+
+  void _updateHeatmap() async {
+    // Increment today's count (today is the last item in the list)
+    _heatmapData[27]++;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('heatmap_data', jsonEncode(_heatmapData));
     notifyListeners();
   }
 
@@ -152,8 +208,10 @@ class AppProvider extends ChangeNotifier {
         repo: _repo!,
         commitCount: actualToRun,
         apiKey: _isAiEnabled ? _googleApiKey : null,
+        enableProWorkflows: _enableProWorkflows,
         onProgress: (done) {
           _completedCommits++;
+          _updateHeatmap();
           notifyListeners();
         },
         onCommit: (record) {

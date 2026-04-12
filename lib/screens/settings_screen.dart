@@ -23,7 +23,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final provider = context.watch<AppProvider>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Settings')),
+      appBar: AppBar(title: const Text('Settings', style: TextStyle(fontWeight: FontWeight.bold))),
       body: ListView(
         padding: const EdgeInsets.all(24),
         children: [
@@ -43,29 +43,58 @@ class _SettingsScreenState extends State<SettingsScreen> {
             onChanged: (v) => provider.setAiSettings(apiKey: v),
           ),
           const SizedBox(height: 32),
-          _buildHeading('Simulation settings'),
-          _buildSwitchTile('Active Hours Only', 'Downtime simulation enabled', true, (v) {}),
-          _buildSwitchTile('Randomize Delays', 'More human-like patterns', true, (v) {}),
+          _buildHeading('Professional Workflows'),
+          _buildSwitchTile(
+            'Multi-Branch & PRs', 
+            'Simulate branching and merging lifecycle', 
+            provider.enableProWorkflows,
+            (v) => provider.toggleProWorkflows(v),
+          ),
           const SizedBox(height: 32),
-          _buildHeading('Account'),
+          _buildHeading('Smart Schedule'),
           ListTile(
-            title: const Text('Reset Application'),
-            subtitle: const Text('Clear all secure storage and logs'),
-            leading: const Icon(Icons.refresh, color: Colors.orangeAccent),
-            onTap: () {
-               // Implement reset logic
+            title: const Text('Working Hours', style: TextStyle(fontWeight: FontWeight.bold)),
+            subtitle: Text('${provider.startTime.format(context)} to ${provider.endTime.format(context)}', style: const TextStyle(color: Colors.white60)),
+            leading: const Icon(Icons.schedule, color: Colors.orangeAccent),
+            trailing: const Icon(Icons.edit, size: 16, color: Colors.white54),
+            onTap: () async {
+              final start = await showTimePicker(context: context, initialTime: provider.startTime);
+              if (start != null) {
+                final end = await showTimePicker(context: context, initialTime: provider.endTime);
+                if (end != null) {
+                  provider.setSchedule(start, end);
+                }
+              }
             },
+          ),
+          const SizedBox(height: 32),
+          _buildHeading('Simulation Tweaks'),
+          _buildSwitchTile('Active Hours Enforcement', 'Simulate human downtime patterns', true, (v) {}),
+          _buildSwitchTile('Contextual Delays', 'More advanced human timing', true, (v) {}),
+          const SizedBox(height: 32),
+          _buildHeading('Account Control'),
+          ListTile(
+            title: const Text('Synchronize Repository'),
+            subtitle: const Text('Manual trigger for full GitHub state sync'),
+            leading: const Icon(Icons.sync, color: Colors.blueAccent),
+            onTap: () => _showSyncAlert(context),
           ),
           const SizedBox(height: 64),
           const Center(
             child: Text(
-              'DevSim Mobile v1.1.0\nExperimental Intelligence Core',
+              'DevSim Mobile v1.2.0 – Premium Edition\nProfessional Activity Intelligence Core',
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white24, fontSize: 12),
+              style: TextStyle(color: Colors.white24, fontSize: 10),
             ),
           )
         ],
       ),
+    );
+  }
+
+  void _showSyncAlert(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Starting full repository synchronization...')),
     );
   }
 

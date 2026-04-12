@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'package:flutter/material.dart';
 import 'logger_service.dart';
 
 enum SimulationMode { instant, realistic, sessionBased }
@@ -7,10 +7,13 @@ class SchedulerService {
   final LoggerService _logger = LoggerService();
   final Random _random = Random();
 
-  bool isCurrentlyInActiveHours() {
+  bool isCurrentlyInActiveHours(TimeOfDay start, TimeOfDay end) {
     final now = DateTime.now();
-    // Typical developer hours: 9 AM to 10 PM
-    return now.hour >= 9 && now.hour <= 22;
+    final nowMinutes = now.hour * 60 + now.minute;
+    final startMinutes = start.hour * 60 + start.minute;
+    final endMinutes = end.hour * 60 + end.minute;
+    
+    return nowMinutes >= startMinutes && nowMinutes <= endMinutes;
   }
 
   Duration calculateNextDelay(SimulationMode mode, {int? baseDelayMinutes}) {
