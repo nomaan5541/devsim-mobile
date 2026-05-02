@@ -85,6 +85,23 @@ class _LoginScreenState extends State<LoginScreen> {
                 'Developer Activity Simulator',
                 style: TextStyle(color: Colors.white60, fontSize: 14),
               ),
+              const SizedBox(height: 12),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  color: Colors.amberAccent.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: Colors.amberAccent.withOpacity(0.3)),
+                ),
+                child: const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.emoji_events, size: 14, color: Colors.amberAccent),
+                    SizedBox(width: 6),
+                    Text('500 DAY CHALLENGE READY', style: TextStyle(color: Colors.amberAccent, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1.0)),
+                  ],
+                ),
+              ),
               const SizedBox(height: 48),
 
               // Token Field

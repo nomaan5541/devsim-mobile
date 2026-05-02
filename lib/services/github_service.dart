@@ -53,7 +53,46 @@ class GitHubService {
         'auto_init': true,
       }),
     );
-    return response.statusCode == 201;
+    if (response.statusCode == 201) {
+      _logger.log('GitHub API: Repo "$name" created successfully.', type: LogType.success);
+      return true;
+    } else {
+      _logger.log('GitHub API: Repo creation failed (${response.statusCode}): ${response.body}', type: LogType.error);
+      return false;
+    }
+  }
+
+  /// Creates a repo and returns the owner login from GitHub's response.
+  /// Returns null if creation failed.
+  Future<String?> createRepoAndGetOwner(String token, String name, bool isPrivate) async {
+    final response = await http.post(
+      Uri.parse('https://api.github.com/user/repos'),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json',
+        'User-Agent': 'DevSim-Mobile-App',
+      },
+      body: jsonEncode({
+        'name': name,
+        'private': isPrivate,
+        'auto_init': true,
+      }),
+    );
+    if (response.statusCode == 201) {
+      final data = jsonDecode(response.body);
+      final ownerLogin = data['owner']?['login'] as String?;
+      _logger.log('GitHub API: Repo "$name" created under owner "$ownerLogin".', type: LogType.success);
+      return ownerLogin;
+    } else if (response.statusCode == 422) {
+      // 422 = repo already exists, try to get the owner
+      _logger.log('GitHub API: Repo "$name" already exists. Fetching owner...', type: LogType.info);
+      final user = await getCurrentUser(token);
+      return user?['login'] as String?;
+    } else {
+      _logger.log('GitHub API: Repo creation failed (${response.statusCode}): ${response.body}', type: LogType.error);
+      return null;
+    }
   }
 
   Future<bool> createOrUpdateFile({
@@ -189,9 +228,37 @@ class GitHubService {
     return response.statusCode == 200;
   }
 
-  Future<Map<String, dynamic>?> getRepoInfo(String token, String owner, String repo) async {
+  Future<bool> createPRComment(String token, String owner, String repo, int prNumber, String body) async {
+    final url = Uri.parse('https://api.github.com/repos/$owner/$repo/issues/$prNumber/comments');
+    final response = await http.post(
+      url,
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json',
+        'User-Agent': 'DevSim-Mobile-App',
+      },
+      body: jsonEncode({
+        'body': body,
+      }),
+    );
+
+    return response.statusCode == 201;
+  }
+
+  Future<String?> getDefaultBranch(String token, String owner, String repo) async {
+    try {
+      final info = await getRepoInfo(token, owner, repo);
+      if (info != null) {
+        return info['default_branch'] as String?;
+      }
+    } catch (_) {}
+    return null;
+  }
+
+  Future<Map<String, dynamic>?> getCurrentUser(String token) async {
     final response = await http.get(
-      Uri.parse('https://api.github.com/repos/$owner/$repo'),
+      Uri.parse('https://api.github.com/user'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': 'application/vnd.github.v3+json',
@@ -200,6 +267,48 @@ class GitHubService {
     );
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
+    }
+    _logger.log('Failed to fetch user profile: ${response.statusCode}', type: LogType.error);
+    return null;
+  }
+
+  Future<Map<String, dynamic>?> getRepoInfo(String token, String owner, String repo) async {
+    // Handle empty owner/repo gracefully
+    if (owner.isEmpty || repo.isEmpty) return null;
+
+    final response = await http.get(
+      Uri.parse('https://api.github.com/repos/$owner/$repo'),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/vnd.github.v3+json',
+        'User-Agent': 'DevSim-Mobile-App',
+      },
+    );
+    
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      _logger.log('Repo check failed: ${response.statusCode} - ${response.reasonPhrase}. Ensure repo name and token permissions are correct.', type: LogType.error);
+      return null;
+    }
+  }
+
+  Future<List<Map<String, dynamic>>?> getFolderContents(String token, String owner, String repo, String path) async {
+    final url = Uri.parse('https://api.github.com/repos/$owner/$repo/contents/$path');
+    final response = await http.get(
+      url,
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/vnd.github.v3+json',
+        'User-Agent': 'DevSim-Mobile-App',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      if (data is List) {
+        return data.cast<Map<String, dynamic>>();
+      }
     }
     return null;
   }

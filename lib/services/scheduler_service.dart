@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'logger_service.dart';
 
@@ -16,14 +17,14 @@ class SchedulerService {
     return nowMinutes >= startMinutes && nowMinutes <= endMinutes;
   }
 
-  Duration calculateNextDelay(SimulationMode mode, {int? baseDelayMinutes}) {
+  Duration calculateNextDelay(SimulationMode mode, TimeOfDay startTime, TimeOfDay endTime, {int? baseDelayMinutes}) {
     if (mode == SimulationMode.instant) {
       return Duration(seconds: _random.nextInt(10) + 5);
     }
 
     if (mode == SimulationMode.realistic) {
       // If outside active hours, delay is much longer
-      if (!isCurrentlyInActiveHours()) {
+      if (!isCurrentlyInActiveHours(startTime, endTime)) {
         _logger.log('Outside active hours. Simulating downtime...', type: LogType.info);
         return Duration(hours: _random.nextInt(4) + 2);
       }

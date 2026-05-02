@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'github_service.dart';
@@ -5,13 +6,21 @@ import 'logger_service.dart';
 import 'scheduler_service.dart';
 import 'session_engine.dart';
 import 'ai_service.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../models/commit_record.dart';
+import '../models/dev_persona.dart';
+import '../models/achievement.dart';
+import '../models/staged_file.dart';
+import '../models/web_project.dart';
+import 'catalog_service.dart';
 
 class AppProvider extends ChangeNotifier {
   final GitHubService _github = GitHubService();
   final LoggerService _logger = LoggerService();
   final SessionEngine _engine = SessionEngine();
   final SchedulerService _scheduler = SchedulerService();
+  final AiService _ai = AiService();
+  final CatalogService _catalog = CatalogService();
 
   String? _token;
   String? _owner;
@@ -23,11 +32,30 @@ class AppProvider extends ChangeNotifier {
   int _failedCommits = 0;
   final List<CommitRecord> _commitHistory = [];
   
+  // AI Studio Staging Area
+  final List<StagedFile> _stagingArea = [];
+  bool _isProcessingBatch = false;
+  
   // Premium Features
   bool _enableProWorkflows = true;
   TimeOfDay _startTime = const TimeOfDay(hour: 9, minute: 0);
   TimeOfDay _endTime = const TimeOfDay(hour: 18, minute: 0);
   final List<int> _heatmapData = List.filled(28, 0); // 4 weeks of data
+  
+  // Ultimate Features
+  DevPersona _persona = DevPersona.fullstack;
+  int _totalLocSimulated = 0;
+  int _prsMerged = 0;
+  int _totalPulses = 0;
+  int _lifetimeFiles = 0;
+  
+  // 500 Day Challenge
+  int _challengeDay = 0;
+  int _currentStreak = 0;
+  List<Achievement> _achievements = [];
+  List<String> _dailyJournal = [];
+  List<String> _liveLogs = [];
+  bool _isCatalogLoaded = false;
 
   // AI Settings
   String? _googleApiKey;
@@ -47,9 +75,23 @@ class AppProvider extends ChangeNotifier {
   TimeOfDay get startTime => _startTime;
   TimeOfDay get endTime => _endTime;
   List<int> get heatmapData => List.unmodifiable(_heatmapData);
+  
+  DevPersona get persona => _persona;
+  int get totalLocSimulated => _totalLocSimulated;
+  int get prsMerged => _prsMerged;
+  int get totalPulses => _totalPulses;
+  int get lifetimeFiles => _lifetimeFiles;
 
   String? get googleApiKey => _googleApiKey;
   bool get isAiEnabled => _isAiEnabled;
+  
+  int get challengeDay => _challengeDay;
+  int get currentStreak => _currentStreak;
+  List<Achievement> get achievements => List.unmodifiable(_achievements);
+  List<String> get dailyJournal => List.unmodifiable(_dailyJournal);
+  List<String> get liveLogs => List.unmodifiable(_liveLogs);
+  List<WebProject> get catalogProjects => _catalog.projects;
+  bool get isCatalogLoaded => _isCatalogLoaded;
 
   double get successRate {
     final total = _completedCommits + _failedCommits;
@@ -62,8 +104,8 @@ class AppProvider extends ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     _googleApiKey = prefs.getString('google_api_key');
     _isAiEnabled = prefs.getBool('is_ai_enabled') ?? false;
-    _owner = prefs.getString('last_owner');
-    _repo = prefs.getString('last_repo');
+    _owner = prefs.getString('last_owner')?.replaceAll(RegExp(r'\s+'), '-');
+    _repo = prefs.getString('last_repo')?.replaceAll(RegExp(r'\s+'), '-');
     
     // Load Premium Settings
     _enableProWorkflows = prefs.getBool('enable_pro_workflows') ?? true;
@@ -74,6 +116,14 @@ class AppProvider extends ChangeNotifier {
     _startTime = TimeOfDay(hour: startHour, minute: startMin);
     _endTime = TimeOfDay(hour: endHour, minute: endMin);
     
+    // Load Ultimate Settings
+    final personaIndex = prefs.getInt('persona_index') ?? 0;
+    _persona = DevPersona.values[personaIndex];
+    _totalLocSimulated = prefs.getInt('total_loc') ?? 0;
+    _prsMerged = prefs.getInt('prs_merged') ?? 0;
+    _totalPulses = prefs.getInt('total_pulses') ?? 0;
+    _lifetimeFiles = prefs.getInt('lifetime_files') ?? 0;
+
     final heatmapString = prefs.getString('heatmap_data');
     if (heatmapString != null) {
       final decoded = jsonDecode(heatmapString) as List<dynamic>;
@@ -82,6 +132,51 @@ class AppProvider extends ChangeNotifier {
       }
     }
 
+    // Load Catalog
+    await _catalog.loadCatalog();
+    _isCatalogLoaded = true;
+    _challengeDay = prefs.getInt('challenge_day') ?? 0;
+    _currentStreak = prefs.getInt('current_streak') ?? 0;
+    _persona = DevPersona.values[prefs.getInt('persona_index') ?? 0];
+    _loadAchievements();
+    notifyListeners();
+  }
+
+  void _loadAchievements() {
+    _achievements = [
+      Achievement(title: 'Getting Started', description: 'Complete Day 1', requirement: 1, icon: Icons.rocket_launch_rounded),
+      Achievement(title: 'Consistency', description: 'Complete 7 Days', requirement: 7, icon: Icons.calendar_today_rounded),
+      Achievement(title: 'Habit Former', description: 'Complete 21 Days', requirement: 21, icon: Icons.psychology_rounded),
+      Achievement(title: 'One Month', description: 'Complete 30 Days', requirement: 30, icon: Icons.auto_awesome_rounded),
+      Achievement(title: 'The Century', description: 'Complete 100 Days', requirement: 100, icon: Icons.emoji_events_rounded),
+      Achievement(title: 'Halfway Hero', description: 'Complete 250 Days', requirement: 250, icon: Icons.star_rounded),
+      Achievement(title: 'The Legend', description: 'Complete 500 Days', requirement: 500, icon: Icons.workspace_premium_rounded),
+    ];
+    for (var a in _achievements) {
+      if (_challengeDay >= a.requirement) a.isUnlocked = true;
+    }
+  }
+
+  Future<void> setPersona(DevPersona p) async {
+    _persona = p;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('persona_index', p.index);
+    notifyListeners();
+  }
+
+  void _recordLoc(int count) async {
+    _totalLocSimulated += count;
+    _totalPulses++;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('total_loc', _totalLocSimulated);
+    await prefs.setInt('total_pulses', _totalPulses);
+    notifyListeners();
+  }
+
+  void _recordSync(int files) async {
+    _lifetimeFiles += files;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('lifetime_files', _lifetimeFiles);
     notifyListeners();
   }
 
@@ -125,43 +220,156 @@ class AppProvider extends ChangeNotifier {
   }
 
   void setConfig({required String owner, required String repo, required SimulationMode mode, required int target}) async {
-    _owner = owner;
-    _repo = repo;
+    _owner = owner.trim().replaceAll(RegExp(r'\s+'), '-');
+    _repo = repo.trim().replaceAll(RegExp(r'\s+'), '-');
     _mode = mode;
-    _targetCommits = target;
+    _targetCommits = target < 10 ? 10 : target; // Enforce minimum 10 commits as requested
     _completedCommits = 0;
     _failedCommits = 0;
     _commitHistory.clear();
     
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('last_owner', owner);
-    await prefs.setString('last_repo', repo);
+    await prefs.setString('last_owner', _owner!);
+    await prefs.setString('last_repo', _repo!);
     
+    notifyListeners();
+  }
+
+  Future<String?> generateManualAiContent({
+    required String prompt,
+    required DevPersona persona,
+    required String extension,
+  }) async {
+    if (_googleApiKey == null) return null;
+    
+    _logger.log('Studio: Manual Intelligence Request ($extension)...', type: LogType.api);
+    
+    // Construct a specific prompt for manual studio work
+    final fullPrompt = '''Act as a Senior $extension Developer with a ${persona.displayName} style. 
+Instruction: $prompt
+CRITICAL: Do NOT include any conversation, introductions, or summaries. 
+OUTPUT ONLY THE VIRGIN CODE. ZERO PLACEHOLDERS.''';
+
+    return await _ai.generateContent(
+      apiKey: _googleApiKey!,
+      prompt: fullPrompt,
+      fallbackExt: extension,
+    );
+  }
+
+  List<StagedFile> get stagingArea => List.unmodifiable(_stagingArea);
+  bool get isProcessingBatch => _isProcessingBatch;
+
+  void addToStaging(StagedFile file) {
+    _stagingArea.add(file);
+    _logger.log('Studio: Staged new file ${file.path}', type: LogType.success);
+    notifyListeners();
+  }
+
+  void removeFromStaging(int index) {
+    if (index >= 0 && index < _stagingArea.length) {
+      _stagingArea.removeAt(index);
+      notifyListeners();
+    }
+  }
+
+  void clearStaging() {
+    _stagingArea.clear();
+    notifyListeners();
+  }
+
+  Future<void> pushStagingToGitHub(String targetRepo) async {
+    if (_stagingArea.isEmpty || _isProcessingBatch) return;
+    
+    final cleanTargetRepo = targetRepo.trim().replaceAll(RegExp(r'\s+'), '-');
+    
+    _isProcessingBatch = true;
+    notifyListeners();
+    
+    _logger.log('Studio: Initializing batch push for ${_stagingArea.length} files...', type: LogType.api);
+    
+    _logger.log('Studio: Validating repository access (Pre-flight)...', type: LogType.api);
+    String? defaultBranch = await _github.getDefaultBranch(_token!, _owner!, cleanTargetRepo);
+    
+    if (defaultBranch == null) {
+      _logger.log('Studio: Repository "$cleanTargetRepo" not found under "$_owner". Auto-creating...', type: LogType.warning);
+      final actualOwner = await _github.createRepoAndGetOwner(_token!, cleanTargetRepo, false);
+      if (actualOwner != null) {
+        _owner = actualOwner;
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('last_owner', _owner!);
+        _logger.log('Studio: Owner resolved to "$_owner". Waiting for propagation...', type: LogType.success);
+        await Future.delayed(const Duration(seconds: 5));
+        defaultBranch = await _github.getDefaultBranch(_token!, _owner!, cleanTargetRepo);
+      }
+      if (defaultBranch == null) {
+        _logger.log('Studio: Sync Error: Could not access or create "$cleanTargetRepo". Check token permissions (needs repo scope).', type: LogType.error);
+        _isProcessingBatch = false;
+        notifyListeners();
+        return;
+      }
+    }
+
+    _logger.log('Studio: Pre-flight Successful. Default branch: $defaultBranch', type: LogType.success);
+
+    int successCount = 0;
+    for (var file in _stagingArea) {
+      final success = await _github.createOrUpdateFile(
+        token: _token!,
+        owner: _owner!,
+        repo: cleanTargetRepo,
+        path: file.path,
+        content: file.content,
+        message: 'studio: ${file.prompt.length > 30 ? file.prompt.substring(0, 30) : file.prompt}',
+        branch: defaultBranch,
+      );
+      
+      if (success) {
+        successCount++;
+        _totalPulses++;
+        _recordSync(1);
+      }
+      
+      // Delay to avoid race conditions and provide "pulse" feel
+      await Future.delayed(const Duration(seconds: 2));
+    }
+
+    _logger.log('Studio: Batch push complete. $successCount/${_stagingArea.length} files synchronized.', type: LogType.success);
+    
+    _isProcessingBatch = false;
+    _stagingArea.clear();
     notifyListeners();
   }
 
   Future<bool> createRepository({required String owner, required String name, required bool isPrivate}) async {
     if (_token == null) return false;
-    _logger.log('Creating new repository: $name for $owner...', type: LogType.api);
-    final success = await _github.createRepo(_token!, name, isPrivate);
+    final cleanName = name.trim().replaceAll(RegExp(r'\s+'), '-');
+    final cleanOwner = owner.trim().replaceAll(RegExp(r'\s+'), '-');
+    
+    _logger.log('Creating new repository: $cleanName for $cleanOwner...', type: LogType.api);
+    final success = await _github.createRepo(_token!, cleanName, isPrivate);
     
     if (success) {
-      _logger.log('Repo created successfully. Initializing structure...', type: LogType.success);
-      _owner = owner; // Set owner immediately
+      _logger.log('Repo created. Waiting for GitHub propagation (3s)...', type: LogType.info);
+      await Future.delayed(const Duration(seconds: 3)); // Fix for 404 race condition
+      
+      _logger.log('Initializing repository structure...', type: LogType.api);
+      _owner = cleanOwner;
+      _repo = cleanName;
       
       // Auto-push initial files
       await _github.createOrUpdateFile(
         token: _token!,
-        owner: owner,
-        repo: name,
+        owner: cleanOwner,
+        repo: cleanName,
         path: 'README.md',
-        content: '# $name\n\nGenerated by DevSim Mobile.\n\nAutomated activity simulation active.',
+        content: '# $cleanName\n\nGenerated by DevSim Mobile.\n\nAutomated activity simulation active.',
         message: 'Initial commit: README',
       );
       await _github.createOrUpdateFile(
         token: _token!,
-        owner: owner,
-        repo: name,
+        owner: cleanOwner,
+        repo: cleanName,
         path: '.gitignore',
         content: '# AI Activity Simulation\n*.log\nnode_modules/\n.env\n.DS_Store',
         message: 'Initial commit: .gitignore',
@@ -182,6 +390,30 @@ class AppProvider extends ChangeNotifier {
   }
 
   Future<void> _startSessionLoop() async {
+    _logger.log('Pre-flight check: Validating repository access...', type: LogType.api);
+    String? defaultBranch = await _github.getDefaultBranch(_token!, _owner!, _repo!);
+    
+    if (defaultBranch == null) {
+      _logger.log('Repository "$_repo" not found under "$_owner". Auto-creating...', type: LogType.warning);
+      final actualOwner = await _github.createRepoAndGetOwner(_token!, _repo!, false);
+      if (actualOwner != null) {
+        _owner = actualOwner;
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('last_owner', _owner!);
+        _logger.log('Owner resolved to "$_owner". Waiting for GitHub propagation...', type: LogType.success);
+        await Future.delayed(const Duration(seconds: 5));
+        defaultBranch = await _github.getDefaultBranch(_token!, _owner!, _repo!);
+      }
+      if (defaultBranch == null) {
+        _logger.log('Sync Error: Could not access or create "$_repo". Check token permissions (needs repo scope).', type: LogType.error);
+        _isRunning = false;
+        notifyListeners();
+        return;
+      }
+    }
+
+    _logger.log('Sync Successful. Default branch: $defaultBranch', type: LogType.success);
+
     while (_isRunning) {
       if (_token == null || _owner == null || _repo == null) break;
 
@@ -207,11 +439,15 @@ class AppProvider extends ChangeNotifier {
         owner: _owner!,
         repo: _repo!,
         commitCount: actualToRun,
+        defaultBranch: defaultBranch,
         apiKey: _isAiEnabled ? _googleApiKey : null,
         enableProWorkflows: _enableProWorkflows,
+        persona: _persona,
         onProgress: (done) {
           _completedCommits++;
           _updateHeatmap();
+          _recordLoc(35); // Estimated 35 lines per commit
+          _recordSync(1); // One more file processed
           notifyListeners();
         },
         onCommit: (record) {
@@ -223,8 +459,11 @@ class AppProvider extends ChangeNotifier {
 
       if (!_isRunning) break;
 
-      final delay = _scheduler.calculateNextDelay(_mode);
-      _logger.log('Next session in ${delay.inMinutes} minutes...', type: LogType.info);
+      final delay = _scheduler.calculateNextDelay(_mode, _startTime, _endTime);
+      final delayMsg = delay.inMinutes > 0 
+        ? '${delay.inMinutes} minutes' 
+        : '${delay.inSeconds} seconds';
+      _logger.log('Next session in $delayMsg...', type: LogType.info);
       await Future.delayed(delay);
     }
   }
@@ -235,15 +474,128 @@ class AppProvider extends ChangeNotifier {
       if (success) {
         _token = token;
         await _github.saveToken(token);
-        // Also fetch user to set owner
-        final info = await _github.getRepoInfo(token, '', ''); // Actually get current user
-        // Note: github_service should have a getMe() but we use getRepoInfo carefully
-        _logger.log('Auth successful.', type: LogType.success);
+        
+        final user = await _github.getCurrentUser(token);
+        if (user != null) {
+          _owner = user['login'];
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setString('last_owner', _owner!);
+          _logger.log('Auth successful. Identity: $_owner', type: LogType.success);
+        }
         notifyListeners();
       }
       return success;
     } catch (e) {
+      _logger.log('Login error: $e', type: LogType.error);
       return false;
     }
+  }
+
+  Future<void> setChallengeDay(int day) async {
+    _challengeDay = day;
+    // Calculate streak logic (simplified for now: if they commit, streak increases)
+    _currentStreak++; 
+    
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('challenge_day', day);
+    await prefs.setInt('current_streak', _currentStreak);
+    
+    _loadAchievements();
+    notifyListeners();
+  }
+
+  Future<void> commitCatalogProject(WebProject project) async {
+    if (_token == null || _owner == null || _repo == null) {
+      _logger.log('Catalog: Auth required to commit project.', type: LogType.error);
+      return;
+    }
+
+    _logger.log('Catalog: Syncing Bundled Code for Project #${project.day} (${project.name})...', type: LogType.api);
+    
+    final projectCode = await _catalog.getProjectCode(project.path);
+    
+    if (projectCode == null || projectCode.isEmpty) {
+      _logger.log('Catalog: Error: Project code not found in bundle for ${project.name}.', type: LogType.error);
+      return;
+    }
+
+    _logger.log('Catalog: Found ${projectCode.length} files in bundle. Starting pulse...', type: LogType.info);
+
+    int committedCount = 0;
+    for (var entry in projectCode.entries) {
+      final fileName = entry.key;
+      final content = entry.value as String;
+      
+      String message;
+      switch (_persona) {
+        case DevPersona.architect:
+          message = 'refactor(${project.name}): implement $fileName with architectural best practices';
+          break;
+        case DevPersona.bugFixer:
+          message = 'fix(${project.name}): optimize $fileName for robustness and performance';
+          break;
+        case DevPersona.hacker:
+          message = 'feat(${project.name}): lightning pulse $fileName';
+          break;
+        case DevPersona.fullstack:
+        default:
+          message = 'feat(${project.name}): add $fileName';
+      }
+      
+      final success = await _github.createOrUpdateFile(
+        token: _token!,
+        owner: _owner!,
+        repo: _repo!,
+        path: '${project.name}/$fileName',
+        content: content,
+        message: message,
+      );
+      
+      if (success) {
+        committedCount++;
+        _completedCommits++;
+        _recordSync(1);
+        final log = '[$fileName] Pushed with ${_persona.displayName} style.';
+        _liveLogs.insert(0, log);
+        if (_liveLogs.length > 50) _liveLogs.removeLast();
+        
+        _commitHistory.insert(0, CommitRecord(
+          path: '${project.name}/$fileName',
+          message: message,
+          timestamp: DateTime.now(),
+          isSuccess: true,
+        ));
+        notifyListeners();
+      }
+      
+      await Future.delayed(const Duration(seconds: 1));
+    }
+
+    if (_challengeDay < project.day) {
+      await setChallengeDay(project.day);
+      _dailyJournal.insert(0, 'Day ${project.day}: Built "${project.name}" using ${_persona.displayName} persona. Integrated ${committedCount} modules.');
+    }
+    
+    _logger.log('Catalog: Project #${project.day} ($committedCount files) synchronized successfully.', type: LogType.success);
+    notifyListeners();
+  }
+
+  Future<void> requestPermissions() async {
+    _logger.log('System: Requesting background and storage permissions...', type: LogType.info);
+    
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.storage,
+      Permission.notification,
+      Permission.ignoreBatteryOptimizations,
+    ].request();
+    
+    if (statuses[Permission.storage]!.isGranted) {
+      _logger.log('System: Storage access GRANTED.', type: LogType.success);
+    }
+    if (statuses[Permission.ignoreBatteryOptimizations]!.isGranted) {
+      _logger.log('System: Background activity GRANTED.', type: LogType.success);
+    }
+    
+    notifyListeners();
   }
 }

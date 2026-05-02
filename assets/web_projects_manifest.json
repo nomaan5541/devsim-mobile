@@ -1,0 +1,2502 @@
+[
+  {
+    "day": 1,
+    "name": "01-404-Page-Not-Found",
+    "path": "01-404-Page-Not-Found"
+  },
+  {
+    "day": 2,
+    "name": "02-Animated-3D-Weather-Widget",
+    "path": "02-Animated-3D-Weather-Widget"
+  },
+  {
+    "day": 3,
+    "name": "03-Cyberspace-Portal",
+    "path": "03-Cyberspace-Portal"
+  },
+  {
+    "day": 4,
+    "name": "3D Animation Bee",
+    "path": "3D Animation Bee"
+  },
+  {
+    "day": 5,
+    "name": "3D Card Animation",
+    "path": "3D Card Animation"
+  },
+  {
+    "day": 6,
+    "name": "04-Deadline-Loading",
+    "path": "04-Deadline-Loading"
+  },
+  {
+    "day": 7,
+    "name": "05-Flowers",
+    "path": "05-Flowers"
+  },
+  {
+    "day": 8,
+    "name": "06-Glowy-Hover-Effect",
+    "path": "06-Glowy-Hover-Effect"
+  },
+  {
+    "day": 9,
+    "name": "07-Happy-Birthday-Firework",
+    "path": "07-Happy-Birthday-Firework"
+  },
+  {
+    "day": 10,
+    "name": "08-Interactive-Whale",
+    "path": "08-Interactive-Whale"
+  },
+  {
+    "day": 11,
+    "name": "09-Newyear-Fireworks-Animation",
+    "path": "09-Newyear-Fireworks-Animation"
+  },
+  {
+    "day": 12,
+    "name": "10-Nixie-Tube-Clock",
+    "path": "10-Nixie-Tube-Clock"
+  },
+  {
+    "day": 13,
+    "name": "11-Squidematics",
+    "path": "11-Squidematics"
+  },
+  {
+    "day": 14,
+    "name": "12-3D-particles-to-a-2D-canvas",
+    "path": "12-3D-particles-to-a-2D-canvas"
+  },
+  {
+    "day": 15,
+    "name": "13-404-room-css",
+    "path": "13-404-room-css"
+  },
+  {
+    "day": 16,
+    "name": "14-Amazing-Stress-Ball",
+    "path": "14-Amazing-Stress-Ball"
+  },
+  {
+    "day": 17,
+    "name": "15-cosmos-a-spacetime-odyssey",
+    "path": "15-cosmos-a-spacetime-odyssey"
+  },
+  {
+    "day": 18,
+    "name": "16-CSS-3D-Card-with-Vanilla-Tilt",
+    "path": "16-CSS-3D-Card-with-Vanilla-Tilt"
+  },
+  {
+    "day": 19,
+    "name": "17-Css-Solar-System",
+    "path": "17-Css-Solar-System"
+  },
+  {
+    "day": 20,
+    "name": "18-WebGL-Particle-Sphere-and-Orbits",
+    "path": "18-WebGL-Particle-Sphere-and-Orbits"
+  },
+  {
+    "day": 21,
+    "name": "19-Funny-Toggle-Switchs",
+    "path": "19-Funny-Toggle-Switchs"
+  },
+  {
+    "day": 22,
+    "name": "20-Squid-Game-Loading",
+    "path": "20-Squid-Game-Loading"
+  },
+  {
+    "day": 23,
+    "name": "21-Flex-Expand-on-Hover",
+    "path": "21-Flex-Expand-on-Hover"
+  },
+  {
+    "day": 24,
+    "name": "22-Glow-Effect-to-LineBasicMaterial",
+    "path": "22-Glow-Effect-to-LineBasicMaterial"
+  },
+  {
+    "day": 25,
+    "name": "23-Sphere-Packing-3D",
+    "path": "23-Sphere-Packing-3D"
+  },
+  {
+    "day": 26,
+    "name": "24-Birthday-Animation",
+    "path": "24-Birthday-Animation"
+  },
+  {
+    "day": 27,
+    "name": "25-Realistic-Globe",
+    "path": "25-Realistic-Globe"
+  },
+  {
+    "day": 28,
+    "name": "26-Chicken-CSS",
+    "path": "26-Chicken-CSS"
+  },
+  {
+    "day": 29,
+    "name": "27-Acrobatic-Loading-Animation",
+    "path": "27-Acrobatic-Loading-Animation"
+  },
+  {
+    "day": 30,
+    "name": "28-Do-you-love-me",
+    "path": "28-Do-you-love-me"
+  },
+  {
+    "day": 31,
+    "name": "29-Newton-sun-and-moon-loader",
+    "path": "29-Newton-sun-and-moon-loader"
+  },
+  {
+    "day": 32,
+    "name": "30-Order-confirm-animation",
+    "path": "30-Order-confirm-animation"
+  },
+  {
+    "day": 33,
+    "name": "31-Headphone-Background-Animation",
+    "path": "31-Headphone-Background-Animation"
+  },
+  {
+    "day": 34,
+    "name": "32-I-love-you-Animation",
+    "path": "32-I-love-you-Animation"
+  },
+  {
+    "day": 35,
+    "name": "33-Monster-Tooth-Toogle",
+    "path": "33-Monster-Tooth-Toogle"
+  },
+  {
+    "day": 36,
+    "name": "34-Multiple-Window-3d-Scene",
+    "path": "34-Multiple-Window-3d-Scene"
+  },
+  {
+    "day": 37,
+    "name": "35-The-impossible-light-bulb",
+    "path": "35-The-impossible-light-bulb"
+  },
+  {
+    "day": 38,
+    "name": "36-Valentines-Day-Card",
+    "path": "36-Valentines-Day-Card"
+  },
+  {
+    "day": 39,
+    "name": "37-10-Different-Pulse-Effect",
+    "path": "37-10-Different-Pulse-Effect"
+  },
+  {
+    "day": 40,
+    "name": "38-10-Different-Spinner",
+    "path": "38-10-Different-Spinner"
+  },
+  {
+    "day": 41,
+    "name": "39-3d-Flipping-Text",
+    "path": "39-3d-Flipping-Text"
+  },
+  {
+    "day": 42,
+    "name": "40-3d-Card-With-Hover",
+    "path": "40-3d-Card-With-Hover"
+  },
+  {
+    "day": 43,
+    "name": "41-4-Dot-Liquid-Loader",
+    "path": "41-4-Dot-Liquid-Loader"
+  },
+  {
+    "day": 44,
+    "name": "42-403-Landing-Page",
+    "path": "42-403-Landing-Page"
+  },
+  {
+    "day": 45,
+    "name": "43-9-Dot-Navigation",
+    "path": "43-9-Dot-Navigation"
+  },
+  {
+    "day": 46,
+    "name": "44-9-Dots-Navigation-Updated",
+    "path": "44-9-Dots-Navigation-Updated"
+  },
+  {
+    "day": 47,
+    "name": "45-Animated-Skills-Bar",
+    "path": "45-Animated-Skills-Bar"
+  },
+  {
+    "day": 48,
+    "name": "46-Beer-404-Page",
+    "path": "46-Beer-404-Page"
+  },
+  {
+    "day": 49,
+    "name": "47-Butterfly-Share-Button",
+    "path": "47-Butterfly-Share-Button"
+  },
+  {
+    "day": 50,
+    "name": "48-Css-Cube-Hover-Effect",
+    "path": "48-Css-Cube-Hover-Effect"
+  },
+  {
+    "day": 51,
+    "name": "49-Card-Hover-Effect-V1",
+    "path": "49-Card-Hover-Effect-V1"
+  },
+  {
+    "day": 52,
+    "name": "50-Card-Hover-Effect-V2",
+    "path": "50-Card-Hover-Effect-V2"
+  },
+  {
+    "day": 53,
+    "name": "51-Card-Hover-Effect-V3",
+    "path": "51-Card-Hover-Effect-V3"
+  },
+  {
+    "day": 54,
+    "name": "52-Creative-Link-Hover",
+    "path": "52-Creative-Link-Hover"
+  },
+  {
+    "day": 55,
+    "name": "53-Custom-Captcha-Generator-Using-Js",
+    "path": "53-Custom-Captcha-Generator-Using-Js"
+  },
+  {
+    "day": 56,
+    "name": "54-Detect-Battery-Status",
+    "path": "54-Detect-Battery-Status"
+  },
+  {
+    "day": 57,
+    "name": "55-Digital-Clock-With-Reflection",
+    "path": "55-Digital-Clock-With-Reflection"
+  },
+  {
+    "day": 58,
+    "name": "56-Download-Button",
+    "path": "56-Download-Button"
+  },
+  {
+    "day": 59,
+    "name": "57-Drop-Liquid-Loading",
+    "path": "57-Drop-Liquid-Loading"
+  },
+  {
+    "day": 60,
+    "name": "58-Dynamic-Calendar-Javascript",
+    "path": "58-Dynamic-Calendar-Javascript"
+  },
+  {
+    "day": 61,
+    "name": "59-Dynamic-Stopwatch",
+    "path": "59-Dynamic-Stopwatch"
+  },
+  {
+    "day": 62,
+    "name": "60-Forest-Parallex-Website",
+    "path": "60-Forest-Parallex-Website"
+  },
+  {
+    "day": 63,
+    "name": "61-Frame-Hover-Effect",
+    "path": "61-Frame-Hover-Effect"
+  },
+  {
+    "day": 64,
+    "name": "62-Glassmorph-Calculator",
+    "path": "62-Glassmorph-Calculator"
+  },
+  {
+    "day": 65,
+    "name": "63-Glassmorph-Loader",
+    "path": "63-Glassmorph-Loader"
+  },
+  {
+    "day": 66,
+    "name": "64-Glassmorphism-Analog-Clock",
+    "path": "64-Glassmorphism-Analog-Clock"
+  },
+  {
+    "day": 67,
+    "name": "65-Glassmorphism-Credit-Card",
+    "path": "65-Glassmorphism-Credit-Card"
+  },
+  {
+    "day": 68,
+    "name": "66-Glowing-Input-Login-Form",
+    "path": "66-Glowing-Input-Login-Form"
+  },
+  {
+    "day": 69,
+    "name": "67-Glowing-Neon-Buttons",
+    "path": "67-Glowing-Neon-Buttons"
+  },
+  {
+    "day": 70,
+    "name": "68-Google-Fiber-Loader",
+    "path": "68-Google-Fiber-Loader"
+  },
+  {
+    "day": 71,
+    "name": "69-Hacker-Login-Form",
+    "path": "69-Hacker-Login-Form"
+  },
+  {
+    "day": 72,
+    "name": "70-Heart-Loader",
+    "path": "70-Heart-Loader"
+  },
+  {
+    "day": 73,
+    "name": "71-Heart-Rate-Animation",
+    "path": "71-Heart-Rate-Animation"
+  },
+  {
+    "day": 74,
+    "name": "72-I-Love-You-Card",
+    "path": "72-I-Love-You-Card"
+  },
+  {
+    "day": 75,
+    "name": "73-Indian-Flag-Using-Css",
+    "path": "73-Indian-Flag-Using-Css"
+  },
+  {
+    "day": 76,
+    "name": "74-Juicy-Hamburgers-Menu",
+    "path": "74-Juicy-Hamburgers-Menu"
+  },
+  {
+    "day": 77,
+    "name": "75-Lines-Background-Animation",
+    "path": "75-Lines-Background-Animation"
+  },
+  {
+    "day": 78,
+    "name": "76-Liquid-Loader",
+    "path": "76-Liquid-Loader"
+  },
+  {
+    "day": 79,
+    "name": "77-Magic-Indicator-Menu",
+    "path": "77-Magic-Indicator-Menu"
+  },
+  {
+    "day": 80,
+    "name": "78-Magic-Navigation-Menu",
+    "path": "78-Magic-Navigation-Menu"
+  },
+  {
+    "day": 81,
+    "name": "79-Magic-Navigation-Menu-2",
+    "path": "79-Magic-Navigation-Menu-2"
+  },
+  {
+    "day": 82,
+    "name": "80-Magic-Social-Share-Menu",
+    "path": "80-Magic-Social-Share-Menu"
+  },
+  {
+    "day": 83,
+    "name": "81-Moon-Animation",
+    "path": "81-Moon-Animation"
+  },
+  {
+    "day": 84,
+    "name": "82-Neon-Button",
+    "path": "82-Neon-Button"
+  },
+  {
+    "day": 85,
+    "name": "83-Neon-Dash-Loader",
+    "path": "83-Neon-Dash-Loader"
+  },
+  {
+    "day": 86,
+    "name": "84-Neon-Navigation",
+    "path": "84-Neon-Navigation"
+  },
+  {
+    "day": 87,
+    "name": "85-Neumorphism-Calculator-With-Dark-light",
+    "path": "85-Neumorphism-Calculator-With-Dark-light"
+  },
+  {
+    "day": 88,
+    "name": "86-Neumorphism-Clock",
+    "path": "86-Neumorphism-Clock"
+  },
+  {
+    "day": 89,
+    "name": "87-Neumorphism-Rocket-Loader",
+    "path": "87-Neumorphism-Rocket-Loader"
+  },
+  {
+    "day": 90,
+    "name": "88-Ninja-Calculator",
+    "path": "88-Ninja-Calculator"
+  },
+  {
+    "day": 91,
+    "name": "89-Parallax-Scrolling-Website",
+    "path": "89-Parallax-Scrolling-Website"
+  },
+  {
+    "day": 92,
+    "name": "90-Particles-Button",
+    "path": "90-Particles-Button"
+  },
+  {
+    "day": 93,
+    "name": "91-Password-Generator",
+    "path": "91-Password-Generator"
+  },
+  {
+    "day": 94,
+    "name": "92-Password-Strength-Checker",
+    "path": "92-Password-Strength-Checker"
+  },
+  {
+    "day": 95,
+    "name": "93-Quadratic-Loader",
+    "path": "93-Quadratic-Loader"
+  },
+  {
+    "day": 96,
+    "name": "94-Responsive-Grid-Tracks",
+    "path": "94-Responsive-Grid-Tracks"
+  },
+  {
+    "day": 97,
+    "name": "95-Responsive-Service-Section",
+    "path": "95-Responsive-Service-Section"
+  },
+  {
+    "day": 98,
+    "name": "96-Search-Bar",
+    "path": "96-Search-Bar"
+  },
+  {
+    "day": 99,
+    "name": "97-Search-Box",
+    "path": "97-Search-Box"
+  },
+  {
+    "day": 100,
+    "name": "98-Simple-Alarm-Clock",
+    "path": "98-Simple-Alarm-Clock"
+  },
+  {
+    "day": 101,
+    "name": "99-Sliding-Product-Card",
+    "path": "99-Sliding-Product-Card"
+  },
+  {
+    "day": 102,
+    "name": "100-Snake-Login-Form",
+    "path": "100-Snake-Login-Form"
+  },
+  {
+    "day": 103,
+    "name": "101-Sneakers-Product-Card",
+    "path": "101-Sneakers-Product-Card"
+  },
+  {
+    "day": 104,
+    "name": "102-Social-Share-Button",
+    "path": "102-Social-Share-Button"
+  },
+  {
+    "day": 105,
+    "name": "103-Space-Parallex-Scrolling",
+    "path": "103-Space-Parallex-Scrolling"
+  },
+  {
+    "day": 106,
+    "name": "104-Tab-Bar-Navigation",
+    "path": "104-Tab-Bar-Navigation"
+  },
+  {
+    "day": 107,
+    "name": "105-Tab-Bar-Navigation",
+    "path": "105-Tab-Bar-Navigation"
+  },
+  {
+    "day": 108,
+    "name": "106-Text-Card-Hover-Effect",
+    "path": "106-Text-Card-Hover-Effect"
+  },
+  {
+    "day": 109,
+    "name": "107-Text-Hover-Effect-India-Ukraine-Russia",
+    "path": "107-Text-Hover-Effect-India-Ukraine-Russia"
+  },
+  {
+    "day": 110,
+    "name": "108-Theme-Digital-Clock",
+    "path": "108-Theme-Digital-Clock"
+  },
+  {
+    "day": 111,
+    "name": "109-Thinking-Hand",
+    "path": "109-Thinking-Hand"
+  },
+  {
+    "day": 112,
+    "name": "110-Todo-List-App",
+    "path": "110-Todo-List-App"
+  },
+  {
+    "day": 113,
+    "name": "111-Video-Button-Animation",
+    "path": "111-Video-Button-Animation"
+  },
+  {
+    "day": 114,
+    "name": "112-Wacky-Hamburger-Menu",
+    "path": "112-Wacky-Hamburger-Menu"
+  },
+  {
+    "day": 115,
+    "name": "113-Liquid-Glass-Effect",
+    "path": "113-Liquid-Glass-Effect"
+  },
+  {
+    "day": 116,
+    "name": "114-Solar-System-Explorer",
+    "path": "114-Solar-System-Explorer"
+  },
+  {
+    "day": 117,
+    "name": "115-Image-Gallery",
+    "path": "115-Image-Gallery"
+  },
+  {
+    "day": 118,
+    "name": "116-Airpods-Landing-Animation",
+    "path": "116-Airpods-Landing-Animation"
+  },
+  {
+    "day": 119,
+    "name": "117-Glowing-Neon-Cursor",
+    "path": "117-Glowing-Neon-Cursor"
+  },
+  {
+    "day": 120,
+    "name": "118-Hover-for-Social",
+    "path": "118-Hover-for-Social"
+  },
+  {
+    "day": 121,
+    "name": "119-Solar-System-Explorer",
+    "path": "119-Solar-System-Explorer"
+  },
+  {
+    "day": 122,
+    "name": "120-Squidgame-Fun-Project",
+    "path": "120-Squidgame-Fun-Project"
+  },
+  {
+    "day": 123,
+    "name": "121-Cow-Error-Page",
+    "path": "121-Cow-Error-Page"
+  },
+  {
+    "day": 124,
+    "name": "122-3d-Plain-Cursor",
+    "path": "122-3d-Plain-Cursor"
+  },
+  {
+    "day": 125,
+    "name": "123-Animated-Image-Gallery",
+    "path": "123-Animated-Image-Gallery"
+  },
+  {
+    "day": 126,
+    "name": "124-Credit-Card-Animation",
+    "path": "124-Credit-Card-Animation"
+  },
+  {
+    "day": 127,
+    "name": "125-Dragon-Cursor-Effect",
+    "path": "125-Dragon-Cursor-Effect"
+  },
+  {
+    "day": 128,
+    "name": "126-Interactive-Product-Card",
+    "path": "126-Interactive-Product-Card"
+  },
+  {
+    "day": 129,
+    "name": "127-Neon-Website",
+    "path": "127-Neon-Website"
+  },
+  {
+    "day": 130,
+    "name": "128-Text-Masking",
+    "path": "128-Text-Masking"
+  },
+  {
+    "day": 131,
+    "name": "129-Interactive-Ghost-Card",
+    "path": "129-Interactive-Ghost-Card"
+  },
+  {
+    "day": 132,
+    "name": "130-Valentine-Animation-Card",
+    "path": "130-Valentine-Animation-Card"
+  },
+  {
+    "day": 133,
+    "name": "131-Book-Portfolio-Website",
+    "path": "131-Book-Portfolio-Website"
+  },
+  {
+    "day": 134,
+    "name": "132-Star-Particle-Animation",
+    "path": "132-Star-Particle-Animation"
+  },
+  {
+    "day": 135,
+    "name": "133-Fireworks-Launcher",
+    "path": "133-Fireworks-Launcher"
+  },
+  {
+    "day": 136,
+    "name": "134-Tesla-Landing-Page",
+    "path": "134-Tesla-Landing-Page"
+  },
+  {
+    "day": 137,
+    "name": "135-3D-Cake-In-Three-Js",
+    "path": "135-3D-Cake-In-Three-Js"
+  },
+  {
+    "day": 138,
+    "name": "136-Electric-Border",
+    "path": "136-Electric-Border"
+  },
+  {
+    "day": 139,
+    "name": "137-Tubes-Cursor",
+    "path": "137-Tubes-Cursor"
+  },
+  {
+    "day": 140,
+    "name": "138-Sunflower-Animation",
+    "path": "138-Sunflower-Animation"
+  },
+  {
+    "day": 141,
+    "name": "139-Animated-Chair-Product-Page",
+    "path": "139-Animated-Chair-Product-Page"
+  },
+  {
+    "day": 142,
+    "name": "140-Animated-Slider",
+    "path": "140-Animated-Slider"
+  },
+  {
+    "day": 143,
+    "name": "141-Cards-Beam-Animation",
+    "path": "141-Cards-Beam-Animation"
+  },
+  {
+    "day": 144,
+    "name": "142-Egg-Toggle-Swtich-Animated",
+    "path": "142-Egg-Toggle-Swtich-Animated"
+  },
+  {
+    "day": 145,
+    "name": "143-Heart-and-Start-Animation",
+    "path": "143-Heart-and-Start-Animation"
+  },
+  {
+    "day": 146,
+    "name": "144-Next-Level-Electric-Button-Animation",
+    "path": "144-Next-Level-Electric-Button-Animation"
+  },
+  {
+    "day": 147,
+    "name": "145-Order-Button-Animation",
+    "path": "145-Order-Button-Animation"
+  },
+  {
+    "day": 148,
+    "name": "146-Magic-Animated-Motion-Button",
+    "path": "146-Magic-Animated-Motion-Button"
+  },
+  {
+    "day": 149,
+    "name": "147-Pixel-Bat-Animation",
+    "path": "147-Pixel-Bat-Animation"
+  },
+  {
+    "day": 150,
+    "name": "148-Tuggable-Lamp",
+    "path": "148-Tuggable-Lamp"
+  },
+  {
+    "day": 151,
+    "name": "149-Animated-Ghost-Toggle",
+    "path": "149-Animated-Ghost-Toggle"
+  },
+  {
+    "day": 152,
+    "name": "150-Galaxy-Animation",
+    "path": "150-Galaxy-Animation"
+  },
+  {
+    "day": 153,
+    "name": "151-Projection-Map-Custom",
+    "path": "151-Projection-Map-Custom"
+  },
+  {
+    "day": 154,
+    "name": "152-Ghost-Halloween",
+    "path": "152-Ghost-Halloween"
+  },
+  {
+    "day": 155,
+    "name": "153-Animated-Firework-Diwali",
+    "path": "153-Animated-Firework-Diwali"
+  },
+  {
+    "day": 156,
+    "name": "154-Animated-Logout-Button",
+    "path": "154-Animated-Logout-Button"
+  },
+  {
+    "day": 157,
+    "name": "155-Text-Slicer",
+    "path": "155-Text-Slicer"
+  },
+  {
+    "day": 158,
+    "name": "156-Musical-Birthday-Wish",
+    "path": "156-Musical-Birthday-Wish"
+  },
+  {
+    "day": 159,
+    "name": "157-Social-Media-Card-Hover",
+    "path": "157-Social-Media-Card-Hover"
+  },
+  {
+    "day": 160,
+    "name": "158-Cursor-Trail-Image-Animation",
+    "path": "158-Cursor-Trail-Image-Animation"
+  },
+  {
+    "day": 161,
+    "name": "159-For-You-My-Love",
+    "path": "159-For-You-My-Love"
+  },
+  {
+    "day": 162,
+    "name": "160-Heart-Beat-Animation",
+    "path": "160-Heart-Beat-Animation"
+  },
+  {
+    "day": 163,
+    "name": "161-Interactive-3D-Galaxy-Animation",
+    "path": "161-Interactive-3D-Galaxy-Animation"
+  },
+  {
+    "day": 164,
+    "name": "162-Shimmer-Button",
+    "path": "162-Shimmer-Button"
+  },
+  {
+    "day": 165,
+    "name": "163-Spider-Clock-Animation",
+    "path": "163-Spider-Clock-Animation"
+  },
+  {
+    "day": 166,
+    "name": "164-Water-Distortion",
+    "path": "164-Water-Distortion"
+  },
+  {
+    "day": 167,
+    "name": "165-Order-Button-Animation",
+    "path": "165-Order-Button-Animation"
+  },
+  {
+    "day": 168,
+    "name": "166-Animated-Search-Bar",
+    "path": "166-Animated-Search-Bar"
+  },
+  {
+    "day": 169,
+    "name": "167-Helmet-Reveal",
+    "path": "167-Helmet-Reveal"
+  },
+  {
+    "day": 170,
+    "name": "168-Magic-Navigation-Tabs-Menu",
+    "path": "168-Magic-Navigation-Tabs-Menu"
+  },
+  {
+    "day": 171,
+    "name": "169-Butterflies-Animation",
+    "path": "169-Butterflies-Animation"
+  },
+  {
+    "day": 172,
+    "name": "170-Clock-Modern-Way",
+    "path": "170-Clock-Modern-Way"
+  },
+  {
+    "day": 173,
+    "name": "171-Dog-Animation",
+    "path": "171-Dog-Animation"
+  },
+  {
+    "day": 174,
+    "name": "172-Funny-Candle-Animation",
+    "path": "172-Funny-Candle-Animation"
+  },
+  {
+    "day": 175,
+    "name": "173-Liquid-Glass-Clock",
+    "path": "173-Liquid-Glass-Clock"
+  },
+  {
+    "day": 176,
+    "name": "174-Morphing-Particle-Sphere",
+    "path": "174-Morphing-Particle-Sphere"
+  },
+  {
+    "day": 177,
+    "name": "175-Rotating-Chrismas-Tree",
+    "path": "175-Rotating-Chrismas-Tree"
+  },
+  {
+    "day": 178,
+    "name": "176-Snow-Fox-Animation",
+    "path": "176-Snow-Fox-Animation"
+  },
+  {
+    "day": 179,
+    "name": "177-Trism-Flux-Landing",
+    "path": "177-Trism-Flux-Landing"
+  },
+  {
+    "day": 180,
+    "name": "178-CSS-Responsive-House-Slider",
+    "path": "178-CSS-Responsive-House-Slider"
+  },
+  {
+    "day": 181,
+    "name": "179-Interactive-Spiral-Animation",
+    "path": "179-Interactive-Spiral-Animation"
+  },
+  {
+    "day": 182,
+    "name": "180-Hologram-Effect-Three-Js",
+    "path": "180-Hologram-Effect-Three-Js"
+  },
+  {
+    "day": 183,
+    "name": "181-Scooter-Animation",
+    "path": "181-Scooter-Animation"
+  },
+  {
+    "day": 184,
+    "name": "182-Christmas-Tree-Animation",
+    "path": "182-Christmas-Tree-Animation"
+  },
+  {
+    "day": 185,
+    "name": "183-Let-It-Draw",
+    "path": "183-Let-It-Draw"
+  },
+  {
+    "day": 186,
+    "name": "184-Let-It-Snow-Flakes",
+    "path": "184-Let-It-Snow-Flakes"
+  },
+  {
+    "day": 187,
+    "name": "185-Authentication-Lock-Design",
+    "path": "185-Authentication-Lock-Design"
+  },
+  {
+    "day": 188,
+    "name": "186-Happy-New-Year-2026",
+    "path": "186-Happy-New-Year-2026"
+  },
+  {
+    "day": 189,
+    "name": "187-Perspective-Loader",
+    "path": "187-Perspective-Loader"
+  },
+  {
+    "day": 190,
+    "name": "188-Slink-Mouse-Cursor",
+    "path": "188-Slink-Mouse-Cursor"
+  },
+  {
+    "day": 191,
+    "name": "189-Snowflakes-Background",
+    "path": "189-Snowflakes-Background"
+  },
+  {
+    "day": 192,
+    "name": "190-Happy-New-Year-Gift",
+    "path": "190-Happy-New-Year-Gift"
+  },
+  {
+    "day": 193,
+    "name": "191-Metaballs-Hero-Section",
+    "path": "191-Metaballs-Hero-Section"
+  },
+  {
+    "day": 194,
+    "name": "192-Mars-Landing",
+    "path": "192-Mars-Landing"
+  },
+  {
+    "day": 195,
+    "name": "193-Animated-Download-Button",
+    "path": "193-Animated-Download-Button"
+  },
+  {
+    "day": 196,
+    "name": "194-Animated-Gaming-Website-GSAP",
+    "path": "194-Animated-Gaming-Website-GSAP"
+  },
+  {
+    "day": 197,
+    "name": "195-Awesome-Cool-Loading-Animation",
+    "path": "195-Awesome-Cool-Loading-Animation"
+  },
+  {
+    "day": 198,
+    "name": "196-Merry-Christmas-tree-Animation",
+    "path": "196-Merry-Christmas-tree-Animation"
+  },
+  {
+    "day": 199,
+    "name": "197-Neural-Glass-Landing",
+    "path": "197-Neural-Glass-Landing"
+  },
+  {
+    "day": 200,
+    "name": "198-Nexaverse-Landing",
+    "path": "198-Nexaverse-Landing"
+  },
+  {
+    "day": 201,
+    "name": "199-Glass-Admin-Dashboard",
+    "path": "199-Glass-Admin-Dashboard"
+  },
+  {
+    "day": 202,
+    "name": "200-Heart-Animation",
+    "path": "200-Heart-Animation"
+  },
+  {
+    "day": 203,
+    "name": "201-Jelly-Squish-Button",
+    "path": "201-Jelly-Squish-Button"
+  },
+  {
+    "day": 204,
+    "name": "202-Shadow-Cursor",
+    "path": "202-Shadow-Cursor"
+  },
+  {
+    "day": 205,
+    "name": "203-Animated-404-Page-GSAP",
+    "path": "203-Animated-404-Page-GSAP"
+  },
+  {
+    "day": 206,
+    "name": "204-Glass-Thermometer",
+    "path": "204-Glass-Thermometer"
+  },
+  {
+    "day": 207,
+    "name": "205-Music-Player",
+    "path": "205-Music-Player"
+  },
+  {
+    "day": 208,
+    "name": "206-Animated-Heart",
+    "path": "206-Animated-Heart"
+  },
+  {
+    "day": 209,
+    "name": "207-Bike-Product-Card",
+    "path": "207-Bike-Product-Card"
+  },
+  {
+    "day": 210,
+    "name": "208-Horse-Running-Animation",
+    "path": "208-Horse-Running-Animation"
+  },
+  {
+    "day": 211,
+    "name": "209-Apple-Dock-Navigation-Menu",
+    "path": "209-Apple-Dock-Navigation-Menu"
+  },
+  {
+    "day": 212,
+    "name": "210-Fishbowl-Save-the-fish",
+    "path": "210-Fishbowl-Save-the-fish"
+  },
+  {
+    "day": 213,
+    "name": "211-Flip-A-Coin",
+    "path": "211-Flip-A-Coin"
+  },
+  {
+    "day": 214,
+    "name": "212-Glowing-Firefly-Button",
+    "path": "212-Glowing-Firefly-Button"
+  },
+  {
+    "day": 215,
+    "name": "213-Glowing-Neon-Clock",
+    "path": "213-Glowing-Neon-Clock"
+  },
+  {
+    "day": 216,
+    "name": "214-Hover-to-Reveal-Password",
+    "path": "214-Hover-to-Reveal-Password"
+  },
+  {
+    "day": 217,
+    "name": "215-Magic-Mouse-Effect",
+    "path": "215-Magic-Mouse-Effect"
+  },
+  {
+    "day": 218,
+    "name": "216-Music-Player-with-Slider-Swiper",
+    "path": "216-Music-Player-with-Slider-Swiper"
+  },
+  {
+    "day": 219,
+    "name": "217-New-year-Animation-2026",
+    "path": "217-New-year-Animation-2026"
+  },
+  {
+    "day": 220,
+    "name": "218-On-Scroll-Fire-Transition",
+    "path": "218-On-Scroll-Fire-Transition"
+  },
+  {
+    "day": 221,
+    "name": "219-Parallax-Depth-Cards",
+    "path": "219-Parallax-Depth-Cards"
+  },
+  {
+    "day": 222,
+    "name": "220-Playable-Piano",
+    "path": "220-Playable-Piano"
+  },
+  {
+    "day": 223,
+    "name": "221-Monster-Alien-Star-Rating",
+    "path": "221-Monster-Alien-Star-Rating"
+  },
+  {
+    "day": 224,
+    "name": "222-Scroll-Drive-All-Things",
+    "path": "222-Scroll-Drive-All-Things"
+  },
+  {
+    "day": 225,
+    "name": "223-Slide-out-Navigation",
+    "path": "223-Slide-out-Navigation"
+  },
+  {
+    "day": 226,
+    "name": "224-Smooth-Parallax-Scrolling-Cards",
+    "path": "224-Smooth-Parallax-Scrolling-Cards"
+  },
+  {
+    "day": 227,
+    "name": "225-Sort-the-Bubble-Clock",
+    "path": "225-Sort-the-Bubble-Clock"
+  },
+  {
+    "day": 228,
+    "name": "226-Valentines-Day-Book",
+    "path": "226-Valentines-Day-Book"
+  },
+  {
+    "day": 229,
+    "name": "227-Valentines-Day-Letter",
+    "path": "227-Valentines-Day-Letter"
+  },
+  {
+    "day": 230,
+    "name": "228-Cool-Responsive-Portfolio",
+    "path": "228-Cool-Responsive-Portfolio"
+  },
+  {
+    "day": 231,
+    "name": "229-Currency-Converter",
+    "path": "229-Currency-Converter"
+  },
+  {
+    "day": 232,
+    "name": "230-Form-Validation",
+    "path": "230-Form-Validation"
+  },
+  {
+    "day": 233,
+    "name": "231-QR-Code-Generator",
+    "path": "231-QR-Code-Generator"
+  },
+  {
+    "day": 234,
+    "name": "232-Weather-App-using-JavaScript",
+    "path": "232-Weather-App-using-JavaScript"
+  },
+  {
+    "day": 235,
+    "name": "233-Calander-usering-JS",
+    "path": "233-Calander-usering-JS"
+  },
+  {
+    "day": 236,
+    "name": "234-Animated-Glowing-Bell-Button",
+    "path": "234-Animated-Glowing-Bell-Button"
+  },
+  {
+    "day": 237,
+    "name": "235-Superman-Loading-Animation",
+    "path": "235-Superman-Loading-Animation"
+  },
+  {
+    "day": 238,
+    "name": "236-Tree-Loading-Animation",
+    "path": "236-Tree-Loading-Animation"
+  },
+  {
+    "day": 239,
+    "name": "237-AM-to-PM-Switch-Animation",
+    "path": "237-AM-to-PM-Switch-Animation"
+  },
+  {
+    "day": 240,
+    "name": "238-Nion-Button-Animation",
+    "path": "238-Nion-Button-Animation"
+  },
+  {
+    "day": 241,
+    "name": "239-3d-Quantum-Neural-Network",
+    "path": "239-3d-Quantum-Neural-Network"
+  },
+  {
+    "day": 242,
+    "name": "240-Angled-Corners-Via-Clip-Path",
+    "path": "240-Angled-Corners-Via-Clip-Path"
+  },
+  {
+    "day": 243,
+    "name": "241-CPC-Cheat-Codes",
+    "path": "241-CPC-Cheat-Codes"
+  },
+  {
+    "day": 244,
+    "name": "242-Data-Tunnel-Three-Js",
+    "path": "242-Data-Tunnel-Three-Js"
+  },
+  {
+    "day": 245,
+    "name": "243-Dither-Ascii-Effect",
+    "path": "243-Dither-Ascii-Effect"
+  },
+  {
+    "day": 246,
+    "name": "244-Liquid-Metal-Button",
+    "path": "244-Liquid-Metal-Button"
+  },
+  {
+    "day": 247,
+    "name": "245-Neumorphism-Principles",
+    "path": "245-Neumorphism-Principles"
+  },
+  {
+    "day": 248,
+    "name": "246-Payment-Status-Screen",
+    "path": "246-Payment-Status-Screen"
+  },
+  {
+    "day": 249,
+    "name": "247-Physics-Of-Wires",
+    "path": "247-Physics-Of-Wires"
+  },
+  {
+    "day": 250,
+    "name": "248-Product-Cards",
+    "path": "248-Product-Cards"
+  },
+  {
+    "day": 251,
+    "name": "249-Team-Carousel",
+    "path": "249-Team-Carousel"
+  },
+  {
+    "day": 252,
+    "name": "250-Before-After-Stream-Three-Js",
+    "path": "250-Before-After-Stream-Three-Js"
+  },
+  {
+    "day": 253,
+    "name": "251-Kinetic-Waves-Three-JS",
+    "path": "251-Kinetic-Waves-Three-JS"
+  },
+  {
+    "day": 254,
+    "name": "252-Magic-Plasma-Sphere-Three-Js",
+    "path": "252-Magic-Plasma-Sphere-Three-Js"
+  },
+  {
+    "day": 255,
+    "name": "253-Start-Button",
+    "path": "253-Start-Button"
+  },
+  {
+    "day": 256,
+    "name": "254-Breathing-Patterns",
+    "path": "254-Breathing-Patterns"
+  },
+  {
+    "day": 257,
+    "name": "255-Draw-A-Perfect-Circle-Challenge",
+    "path": "255-Draw-A-Perfect-Circle-Challenge"
+  },
+  {
+    "day": 258,
+    "name": "256-Eyes-Moving-Effect",
+    "path": "256-Eyes-Moving-Effect"
+  },
+  {
+    "day": 259,
+    "name": "257-Fireworks-2026-Boom-Sound",
+    "path": "257-Fireworks-2026-Boom-Sound"
+  },
+  {
+    "day": 260,
+    "name": "258-Lego-Builder",
+    "path": "258-Lego-Builder"
+  },
+  {
+    "day": 261,
+    "name": "259-Play-IT-DJ-Click-and-Doubleclick",
+    "path": "259-Play-IT-DJ-Click-and-Doubleclick"
+  },
+  {
+    "day": 262,
+    "name": "260-Secure-Terminal-Access-Design",
+    "path": "260-Secure-Terminal-Access-Design"
+  },
+  {
+    "day": 263,
+    "name": "261-The-Grand-Finale-2026",
+    "path": "261-The-Grand-Finale-2026"
+  },
+  {
+    "day": 264,
+    "name": "262-Threejs-Poke-Grid",
+    "path": "262-Threejs-Poke-Grid"
+  },
+  {
+    "day": 265,
+    "name": "263-Window-Alert-From",
+    "path": "263-Window-Alert-From"
+  },
+  {
+    "day": 266,
+    "name": "264-Cloud-Generator",
+    "path": "264-Cloud-Generator"
+  },
+  {
+    "day": 267,
+    "name": "265-Genuary-Lifeform",
+    "path": "265-Genuary-Lifeform"
+  },
+  {
+    "day": 268,
+    "name": "266-Organic-Ai-Orb-No-Canvas",
+    "path": "266-Organic-Ai-Orb-No-Canvas"
+  },
+  {
+    "day": 269,
+    "name": "267-Synth-Wave-Star",
+    "path": "267-Synth-Wave-Star"
+  },
+  {
+    "day": 270,
+    "name": "268-P5-Js-Dots-Image",
+    "path": "268-P5-Js-Dots-Image"
+  },
+  {
+    "day": 271,
+    "name": "269-Trails-In-Formsthree-Js",
+    "path": "269-Trails-In-Formsthree-Js"
+  },
+  {
+    "day": 272,
+    "name": "270-Unscramble-The-Words-On-Scroll",
+    "path": "270-Unscramble-The-Words-On-Scroll"
+  },
+  {
+    "day": 273,
+    "name": "271-Superheroes-Carousel-With-Reflections",
+    "path": "271-Superheroes-Carousel-With-Reflections"
+  },
+  {
+    "day": 274,
+    "name": "272-Circular-Gallery",
+    "path": "272-Circular-Gallery"
+  },
+  {
+    "day": 275,
+    "name": "273-Colors-Avalanche-With-Gravity",
+    "path": "273-Colors-Avalanche-With-Gravity"
+  },
+  {
+    "day": 276,
+    "name": "274-Expanding-Gallery-Using-Corner-Shape-Notch",
+    "path": "274-Expanding-Gallery-Using-Corner-Shape-Notch"
+  },
+  {
+    "day": 277,
+    "name": "275-Fly-In-Cave-Three-Js",
+    "path": "275-Fly-In-Cave-Three-Js"
+  },
+  {
+    "day": 278,
+    "name": "276-Minimalist-Webgl-Lines",
+    "path": "276-Minimalist-Webgl-Lines"
+  },
+  {
+    "day": 279,
+    "name": "277-Morphing-Cyber-Lattice",
+    "path": "277-Morphing-Cyber-Lattice"
+  },
+  {
+    "day": 280,
+    "name": "278-2025-Rewind-Gallary",
+    "path": "278-2025-Rewind-Gallary"
+  },
+  {
+    "day": 281,
+    "name": "279-Cozy-Winter-Northern-Lights-Parallax-Scroll",
+    "path": "279-Cozy-Winter-Northern-Lights-Parallax-Scroll"
+  },
+  {
+    "day": 282,
+    "name": "280-Old-Cloth-With-Wind-Three-Js",
+    "path": "280-Old-Cloth-With-Wind-Three-Js"
+  },
+  {
+    "day": 283,
+    "name": "281-Trails-Over-Different-Forms-Three-Js",
+    "path": "281-Trails-Over-Different-Forms-Three-Js"
+  },
+  {
+    "day": 284,
+    "name": "282-Vertical-Gallery",
+    "path": "282-Vertical-Gallery"
+  },
+  {
+    "day": 285,
+    "name": "283-2026-New-Year-Fireworks",
+    "path": "283-2026-New-Year-Fireworks"
+  },
+  {
+    "day": 286,
+    "name": "284-Icicle-Css-Named-Colors",
+    "path": "284-Icicle-Css-Named-Colors"
+  },
+  {
+    "day": 287,
+    "name": "285-Interactive-Photo-Gallery",
+    "path": "285-Interactive-Photo-Gallery"
+  },
+  {
+    "day": 288,
+    "name": "286-Picket-Fence-Animation",
+    "path": "286-Picket-Fence-Animation"
+  },
+  {
+    "day": 289,
+    "name": "287-Unscramble-The-Words-On-Scroll",
+    "path": "287-Unscramble-The-Words-On-Scroll"
+  },
+  {
+    "day": 290,
+    "name": "288-Vertical-Clock",
+    "path": "288-Vertical-Clock"
+  },
+  {
+    "day": 291,
+    "name": "289-3d-Dices",
+    "path": "289-3d-Dices"
+  },
+  {
+    "day": 292,
+    "name": "290-Css-Only-Stacking-Cards",
+    "path": "290-Css-Only-Stacking-Cards"
+  },
+  {
+    "day": 293,
+    "name": "291-Fancy-Business-Card",
+    "path": "291-Fancy-Business-Card"
+  },
+  {
+    "day": 294,
+    "name": "292-Flip-Text-On-Hoversyntax-Challenge",
+    "path": "292-Flip-Text-On-Hoversyntax-Challenge"
+  },
+  {
+    "day": 295,
+    "name": "293-Fun-Shadow-Coding-Challenge",
+    "path": "293-Fun-Shadow-Coding-Challenge"
+  },
+  {
+    "day": 296,
+    "name": "294-Gallery-3d-Infinite-Hover-Css",
+    "path": "294-Gallery-3d-Infinite-Hover-Css"
+  },
+  {
+    "day": 297,
+    "name": "296-Image-Multi-Effect-3d-Image-Hover",
+    "path": "296-Image-Multi-Effect-3d-Image-Hover"
+  },
+  {
+    "day": 298,
+    "name": "297-Image-Video-Reveal-From-Fragments",
+    "path": "297-Image-Video-Reveal-From-Fragments"
+  },
+  {
+    "day": 299,
+    "name": "298-Mascot-3d-Three-Js",
+    "path": "298-Mascot-3d-Three-Js"
+  },
+  {
+    "day": 300,
+    "name": "299-Now-With-More-Orange",
+    "path": "299-Now-With-More-Orange"
+  },
+  {
+    "day": 301,
+    "name": "300-Select-Base-Color-Picker",
+    "path": "300-Select-Base-Color-Picker"
+  },
+  {
+    "day": 302,
+    "name": "301-Stopwatch",
+    "path": "301-Stopwatch"
+  },
+  {
+    "day": 303,
+    "name": "302-Sun-Glsl",
+    "path": "302-Sun-Glsl"
+  },
+  {
+    "day": 304,
+    "name": "303-Svg-Gradient",
+    "path": "303-Svg-Gradient"
+  },
+  {
+    "day": 305,
+    "name": "304-Text-Reflection-3d",
+    "path": "304-Text-Reflection-3d"
+  },
+  {
+    "day": 306,
+    "name": "305-The-Moon-Album-Cover",
+    "path": "305-The-Moon-Album-Cover"
+  },
+  {
+    "day": 307,
+    "name": "306-Umbral",
+    "path": "306-Umbral"
+  },
+  {
+    "day": 308,
+    "name": "307-Vortex-Css-Only",
+    "path": "307-Vortex-Css-Only"
+  },
+  {
+    "day": 309,
+    "name": "308-Winter-Olympics-Blizzard",
+    "path": "308-Winter-Olympics-Blizzard"
+  },
+  {
+    "day": 310,
+    "name": "309-Zoom-To-Center-On-Scroll-Using-Animation",
+    "path": "309-Zoom-To-Center-On-Scroll-Using-Animation"
+  },
+  {
+    "day": 311,
+    "name": "310-3d-Embossing-Image-Three-Js",
+    "path": "310-3d-Embossing-Image-Three-Js"
+  },
+  {
+    "day": 312,
+    "name": "311-Sands-Of-Timea-Particle-Hourglass",
+    "path": "311-Sands-Of-Timea-Particle-Hourglass"
+  },
+  {
+    "day": 313,
+    "name": "312-Scroll-Animation-With-Sub-Grid",
+    "path": "312-Scroll-Animation-With-Sub-Grid"
+  },
+  {
+    "day": 314,
+    "name": "313-Valentine-2026",
+    "path": "313-Valentine-2026"
+  },
+  {
+    "day": 315,
+    "name": "314-Waves-Pins-Three-Js",
+    "path": "314-Waves-Pins-Three-Js"
+  },
+  {
+    "day": 316,
+    "name": "315-Appearance-Base-Select-Liquid-Glass",
+    "path": "315-Appearance-Base-Select-Liquid-Glass"
+  },
+  {
+    "day": 317,
+    "name": "316-Breathing-Circles",
+    "path": "316-Breathing-Circles"
+  },
+  {
+    "day": 318,
+    "name": "317-Burst-Of-Colour-Spectrum",
+    "path": "317-Burst-Of-Colour-Spectrum"
+  },
+  {
+    "day": 319,
+    "name": "318-Color-Palette-Generator",
+    "path": "318-Color-Palette-Generator"
+  },
+  {
+    "day": 320,
+    "name": "319-Fanned-Cards-With-Hover",
+    "path": "319-Fanned-Cards-With-Hover"
+  },
+  {
+    "day": 321,
+    "name": "320-Glass-Displacement-Effect",
+    "path": "320-Glass-Displacement-Effect"
+  },
+  {
+    "day": 322,
+    "name": "321-Good-Morning-A-A-A-A-A",
+    "path": "321-Good-Morning-A-A-A-A-A"
+  },
+  {
+    "day": 323,
+    "name": "322-Jagged-Crown-Css-Math",
+    "path": "322-Jagged-Crown-Css-Math"
+  },
+  {
+    "day": 324,
+    "name": "323-King-Gizzard-Petrodragonic-3d",
+    "path": "323-King-Gizzard-Petrodragonic-3d"
+  },
+  {
+    "day": 325,
+    "name": "324-Loading-Animations-Svg-Controls",
+    "path": "324-Loading-Animations-Svg-Controls"
+  },
+  {
+    "day": 326,
+    "name": "325-Lorenz-Attractor-Chaos-Prediction",
+    "path": "325-Lorenz-Attractor-Chaos-Prediction"
+  },
+  {
+    "day": 327,
+    "name": "326-Matte-Material-In-Three-Js",
+    "path": "326-Matte-Material-In-Three-Js"
+  },
+  {
+    "day": 328,
+    "name": "327-Neuromorphic-Ui-Components",
+    "path": "327-Neuromorphic-Ui-Components"
+  },
+  {
+    "day": 329,
+    "name": "328-Nosignal-Color-Pallette",
+    "path": "328-Nosignal-Color-Pallette"
+  },
+  {
+    "day": 330,
+    "name": "329-Retro-Pixel-Studio-Cpc-Color-Palettes",
+    "path": "329-Retro-Pixel-Studio-Cpc-Color-Palettes"
+  },
+  {
+    "day": 331,
+    "name": "330-Stack-Of-Folders-With-Custom-Select",
+    "path": "330-Stack-Of-Folders-With-Custom-Select"
+  },
+  {
+    "day": 332,
+    "name": "331-Torus-Glass",
+    "path": "331-Torus-Glass"
+  },
+  {
+    "day": 333,
+    "name": "332-Watchsass-Ts",
+    "path": "332-Watchsass-Ts"
+  },
+  {
+    "day": 334,
+    "name": "333-Carrusel-Circular",
+    "path": "333-Carrusel-Circular"
+  },
+  {
+    "day": 335,
+    "name": "334-CSS-Heart-Animation",
+    "path": "334-CSS-Heart-Animation"
+  },
+  {
+    "day": 336,
+    "name": "335-Aerodynamic-Typography",
+    "path": "335-Aerodynamic-Typography"
+  },
+  {
+    "day": 337,
+    "name": "336-D3-Circular-Function",
+    "path": "336-D3-Circular-Function"
+  },
+  {
+    "day": 338,
+    "name": "337-Dreamscape-Colour-Palette",
+    "path": "337-Dreamscape-Colour-Palette"
+  },
+  {
+    "day": 339,
+    "name": "338-Plaid-Pattern-Generator",
+    "path": "338-Plaid-Pattern-Generator"
+  },
+  {
+    "day": 340,
+    "name": "339-After-Sign-Off",
+    "path": "339-After-Sign-Off"
+  },
+  {
+    "day": 341,
+    "name": "340-Color-Alternative-Spin",
+    "path": "340-Color-Alternative-Spin"
+  },
+  {
+    "day": 342,
+    "name": "341-Color-Mix-Css-Loader",
+    "path": "341-Color-Mix-Css-Loader"
+  },
+  {
+    "day": 343,
+    "name": "342-Cpchallenge-Mix-Or-Blend-Colors",
+    "path": "342-Cpchallenge-Mix-Or-Blend-Colors"
+  },
+  {
+    "day": 344,
+    "name": "343-D3-Circular-Function",
+    "path": "343-D3-Circular-Function"
+  },
+  {
+    "day": 345,
+    "name": "344-Deck-Of-Cards-With-Custom-Select",
+    "path": "344-Deck-Of-Cards-With-Custom-Select"
+  },
+  {
+    "day": 346,
+    "name": "345-Genesis-Enginesolaris",
+    "path": "345-Genesis-Enginesolaris"
+  },
+  {
+    "day": 347,
+    "name": "346-Genuary-11-Quine",
+    "path": "346-Genuary-11-Quine"
+  },
+  {
+    "day": 348,
+    "name": "347-Main-Single-File",
+    "path": "347-Main-Single-File"
+  },
+  {
+    "day": 349,
+    "name": "348-Rotating-Balls-Optical-Illusion",
+    "path": "348-Rotating-Balls-Optical-Illusion"
+  },
+  {
+    "day": 350,
+    "name": "349-Scattered-Organized-Layout-Animation",
+    "path": "349-Scattered-Organized-Layout-Animation"
+  },
+  {
+    "day": 351,
+    "name": "350-Schmetterling-Auf-Eine-Wiese",
+    "path": "350-Schmetterling-Auf-Eine-Wiese"
+  },
+  {
+    "day": 352,
+    "name": "351-Water-Floor-Untitled-UI",
+    "path": "351-Water-Floor-Untitled-UI"
+  },
+  {
+    "day": 353,
+    "name": "352-Void-Velocity",
+    "path": "352-Void-Velocity"
+  },
+  {
+    "day": 354,
+    "name": "353-Animated-Svg-Path",
+    "path": "353-Animated-Svg-Path"
+  },
+  {
+    "day": 355,
+    "name": "354-Confetti-Css-Js",
+    "path": "354-Confetti-Css-Js"
+  },
+  {
+    "day": 356,
+    "name": "355-Devdeskthe-Ultimate",
+    "path": "355-Devdeskthe-Ultimate"
+  },
+  {
+    "day": 357,
+    "name": "356-Jelly-Text-Variable",
+    "path": "356-Jelly-Text-Variable"
+  },
+  {
+    "day": 358,
+    "name": "357-Mars-Clock",
+    "path": "357-Mars-Clock"
+  },
+  {
+    "day": 359,
+    "name": "358-Virtual-Scroll",
+    "path": "358-Virtual-Scroll"
+  },
+  {
+    "day": 360,
+    "name": "359-Animated-Logo-Wheel",
+    "path": "359-Animated-Logo-Wheel"
+  },
+  {
+    "day": 361,
+    "name": "360-Creepy-Newspaper-Mask-Animated-Frames",
+    "path": "360-Creepy-Newspaper-Mask-Animated-Frames"
+  },
+  {
+    "day": 362,
+    "name": "361-Guau-Pawesome-Owners",
+    "path": "361-Guau-Pawesome-Owners"
+  },
+  {
+    "day": 363,
+    "name": "362-Leaf-Flow-With-Wind",
+    "path": "362-Leaf-Flow-With-Wind"
+  },
+  {
+    "day": 364,
+    "name": "363-Octavase",
+    "path": "363-Octavase"
+  },
+  {
+    "day": 365,
+    "name": "364-Pattern-Animation",
+    "path": "364-Pattern-Animation"
+  },
+  {
+    "day": 366,
+    "name": "365-Stormy-Blues",
+    "path": "365-Stormy-Blues"
+  },
+  {
+    "day": 367,
+    "name": "366-Thermometer-Challenge",
+    "path": "366-Thermometer-Challenge"
+  },
+  {
+    "day": 368,
+    "name": "367-404-Error-Face",
+    "path": "367-404-Error-Face"
+  },
+  {
+    "day": 369,
+    "name": "368-Color-Scheme-Finder-With-Adjustcpc",
+    "path": "368-Color-Scheme-Finder-With-Adjustcpc"
+  },
+  {
+    "day": 370,
+    "name": "369-Gradient-Paths",
+    "path": "369-Gradient-Paths"
+  },
+  {
+    "day": 371,
+    "name": "370-Interpolation-Methods-In-Css-Gradients",
+    "path": "370-Interpolation-Methods-In-Css-Gradients"
+  },
+  {
+    "day": 372,
+    "name": "371-Liquid-Glassinteractive-Melt-Effect",
+    "path": "371-Liquid-Glassinteractive-Melt-Effect"
+  },
+  {
+    "day": 373,
+    "name": "372-Mix-And-Blendspiral",
+    "path": "372-Mix-And-Blendspiral"
+  },
+  {
+    "day": 374,
+    "name": "373-New-Color-Soklch-Conic-Gradients",
+    "path": "373-New-Color-Soklch-Conic-Gradients"
+  },
+  {
+    "day": 375,
+    "name": "374-Paint-Tube-Colour-Mixer",
+    "path": "374-Paint-Tube-Colour-Mixer"
+  },
+  {
+    "day": 376,
+    "name": "375-Particles-In-Tornadothree-Js",
+    "path": "375-Particles-In-Tornadothree-Js"
+  },
+  {
+    "day": 377,
+    "name": "376-Particulate-Shatter-An-Image-Harvest-A-Palette",
+    "path": "376-Particulate-Shatter-An-Image-Harvest-A-Palette"
+  },
+  {
+    "day": 378,
+    "name": "377-Pastel-Prism-Mandala-Cute-Blend",
+    "path": "377-Pastel-Prism-Mandala-Cute-Blend"
+  },
+  {
+    "day": 379,
+    "name": "378-Peacock-Oklch",
+    "path": "378-Peacock-Oklch"
+  },
+  {
+    "day": 380,
+    "name": "379-Procedural-Alien-Rock-Three-Js",
+    "path": "379-Procedural-Alien-Rock-Three-Js"
+  },
+  {
+    "day": 381,
+    "name": "380-Roulette-Wheel-With-Css",
+    "path": "380-Roulette-Wheel-With-Css"
+  },
+  {
+    "day": 382,
+    "name": "381-Stonesvg-Filter-Editable",
+    "path": "381-Stonesvg-Filter-Editable"
+  },
+  {
+    "day": 383,
+    "name": "382-Vector-Plankton-Three-Js",
+    "path": "382-Vector-Plankton-Three-Js"
+  },
+  {
+    "day": 384,
+    "name": "383-Water-Effect-Hero",
+    "path": "383-Water-Effect-Hero"
+  },
+  {
+    "day": 385,
+    "name": "384-Cool-Sibling-Index-Into-3d-Positioning",
+    "path": "384-Cool-Sibling-Index-Into-3d-Positioning"
+  },
+  {
+    "day": 386,
+    "name": "385-Css-After-And-Before-Pseudo-Tooltips",
+    "path": "385-Css-After-And-Before-Pseudo-Tooltips"
+  },
+  {
+    "day": 387,
+    "name": "386-Css-Tooltips-Before-After",
+    "path": "386-Css-Tooltips-Before-After"
+  },
+  {
+    "day": 388,
+    "name": "387-Fluid-Plague",
+    "path": "387-Fluid-Plague"
+  },
+  {
+    "day": 389,
+    "name": "388-Galaxy-S26-Privacy-Display-Before-After",
+    "path": "388-Galaxy-S26-Privacy-Display-Before-After"
+  },
+  {
+    "day": 390,
+    "name": "389-Hummingbird",
+    "path": "389-Hummingbird"
+  },
+  {
+    "day": 391,
+    "name": "390-Periodic-Table-Anime-Js",
+    "path": "390-Periodic-Table-Anime-Js"
+  },
+  {
+    "day": 392,
+    "name": "391-Scroll-Animation-With-Grid-Motion",
+    "path": "391-Scroll-Animation-With-Grid-Motion"
+  },
+  {
+    "day": 393,
+    "name": "392-Studio-Display-Xdr-Css-Only",
+    "path": "392-Studio-Display-Xdr-Css-Only"
+  },
+  {
+    "day": 394,
+    "name": "393-Webgl-Shader-Hero-Design",
+    "path": "393-Webgl-Shader-Hero-Design"
+  },
+  {
+    "day": 395,
+    "name": "394-3d-Image-Carousel-Around-Text",
+    "path": "394-3d-Image-Carousel-Around-Text"
+  },
+  {
+    "day": 396,
+    "name": "395-Birds-Follow-Cursor-With-3d-Sound-Three-Js",
+    "path": "395-Birds-Follow-Cursor-With-3d-Sound-Three-Js"
+  },
+  {
+    "day": 397,
+    "name": "396-Dock-Navigation-Macos-Style",
+    "path": "396-Dock-Navigation-Macos-Style"
+  },
+  {
+    "day": 398,
+    "name": "397-Infinite-Gallery-Hall",
+    "path": "397-Infinite-Gallery-Hall"
+  },
+  {
+    "day": 399,
+    "name": "398-Jumpy-Triangle",
+    "path": "398-Jumpy-Triangle"
+  },
+  {
+    "day": 400,
+    "name": "399-More-Fun-With-Fonts",
+    "path": "399-More-Fun-With-Fonts"
+  },
+  {
+    "day": 401,
+    "name": "400-Puzzle-With-Sliding-Insertion-After-Before",
+    "path": "400-Puzzle-With-Sliding-Insertion-After-Before"
+  },
+  {
+    "day": 402,
+    "name": "401-Web-Before-Css-Got-Here",
+    "path": "401-Web-Before-Css-Got-Here"
+  },
+  {
+    "day": 403,
+    "name": "402-Book-Link-Tooltip",
+    "path": "402-Book-Link-Tooltip"
+  },
+  {
+    "day": 404,
+    "name": "403-Commission-Bubble-Pop-Electric",
+    "path": "403-Commission-Bubble-Pop-Electric"
+  },
+  {
+    "day": 405,
+    "name": "404-Cpc-Before-After",
+    "path": "404-Cpc-Before-After"
+  },
+  {
+    "day": 406,
+    "name": "405-Desert-Horse-Cheat-Codes",
+    "path": "405-Desert-Horse-Cheat-Codes"
+  },
+  {
+    "day": 407,
+    "name": "406-Digital-Tokamak-With-Trails-Three-Js",
+    "path": "406-Digital-Tokamak-With-Trails-Three-Js"
+  },
+  {
+    "day": 408,
+    "name": "407-Interactive-Color-Palette",
+    "path": "407-Interactive-Color-Palette"
+  },
+  {
+    "day": 409,
+    "name": "408-Interactive-Wavefield-Shader-Three-Js",
+    "path": "408-Interactive-Wavefield-Shader-Three-Js"
+  },
+  {
+    "day": 410,
+    "name": "409-Launch-Cta100-Followers",
+    "path": "409-Launch-Cta100-Followers"
+  },
+  {
+    "day": 411,
+    "name": "410-Min-And-Max-Hoverable-Volume-Change",
+    "path": "410-Min-And-Max-Hoverable-Volume-Change"
+  },
+  {
+    "day": 412,
+    "name": "411-Polygon-Monolith",
+    "path": "411-Polygon-Monolith"
+  },
+  {
+    "day": 413,
+    "name": "412-Terminal-Motherlode",
+    "path": "412-Terminal-Motherlode"
+  },
+  {
+    "day": 414,
+    "name": "413-The-Unstoppable-Valentine-Proposal",
+    "path": "413-The-Unstoppable-Valentine-Proposal"
+  },
+  {
+    "day": 415,
+    "name": "414-Water-Droplets",
+    "path": "414-Water-Droplets"
+  },
+  {
+    "day": 416,
+    "name": "415-Book-Galleryclick-Image",
+    "path": "415-Book-Galleryclick-Image"
+  },
+  {
+    "day": 417,
+    "name": "416-Interactive-Image-Mosaic",
+    "path": "416-Interactive-Image-Mosaic"
+  },
+  {
+    "day": 418,
+    "name": "417-Interactive-Mouse-Tracking-Eyes",
+    "path": "417-Interactive-Mouse-Tracking-Eyes"
+  },
+  {
+    "day": 419,
+    "name": "418-Min-Max",
+    "path": "418-Min-Max"
+  },
+  {
+    "day": 420,
+    "name": "419-Min-Max-Sine-Rainbow",
+    "path": "419-Min-Max-Sine-Rainbow"
+  },
+  {
+    "day": 421,
+    "name": "420-One-Div-Image-Reveal-Effect",
+    "path": "420-One-Div-Image-Reveal-Effect"
+  },
+  {
+    "day": 422,
+    "name": "421-Rule-Breaking-Slidermin-Max",
+    "path": "421-Rule-Breaking-Slidermin-Max"
+  },
+  {
+    "day": 423,
+    "name": "422-Soft-Ball-Physics",
+    "path": "422-Soft-Ball-Physics"
+  },
+  {
+    "day": 424,
+    "name": "423-Striped-Glass-Animated",
+    "path": "423-Striped-Glass-Animated"
+  },
+  {
+    "day": 425,
+    "name": "424-Crystal-Heart-Animation",
+    "path": "424-Crystal-Heart-Animation"
+  },
+  {
+    "day": 426,
+    "name": "425-Neumorphic-Calculator",
+    "path": "425-Neumorphic-Calculator"
+  },
+  {
+    "day": 427,
+    "name": "426-Yeti-404-Animated-Page",
+    "path": "426-Yeti-404-Animated-Page"
+  },
+  {
+    "day": 428,
+    "name": "427-Glyphsmart-Crypto-Wallet-Landing-Page",
+    "path": "427-Glyphsmart-Crypto-Wallet-Landing-Page"
+  },
+  {
+    "day": 429,
+    "name": "428-Interactive-Liquid-Gradient-Using-Three-Js",
+    "path": "428-Interactive-Liquid-Gradient-Using-Three-Js"
+  },
+  {
+    "day": 430,
+    "name": "429-Aura-Counselor",
+    "path": "429-Aura-Counselor"
+  },
+  {
+    "day": 431,
+    "name": "430-Button-Play",
+    "path": "430-Button-Play"
+  },
+  {
+    "day": 432,
+    "name": "431-Color-Gradient-Animation",
+    "path": "431-Color-Gradient-Animation"
+  },
+  {
+    "day": 433,
+    "name": "432-Curved-Controllers-Svg-Drag-Drop",
+    "path": "432-Curved-Controllers-Svg-Drag-Drop"
+  },
+  {
+    "day": 434,
+    "name": "433-Dragon-Rage-Metercodepen-Challenge",
+    "path": "433-Dragon-Rage-Metercodepen-Challenge"
+  },
+  {
+    "day": 435,
+    "name": "434-Fluid-Synthesizer-Front-End-Opposites",
+    "path": "434-Fluid-Synthesizer-Front-End-Opposites"
+  },
+  {
+    "day": 436,
+    "name": "435-Interactive-Css-Clamp-Playground",
+    "path": "435-Interactive-Css-Clamp-Playground"
+  },
+  {
+    "day": 437,
+    "name": "436-Neural-Synapse-Simulation",
+    "path": "436-Neural-Synapse-Simulation"
+  },
+  {
+    "day": 438,
+    "name": "437-Project-Zero-Point",
+    "path": "437-Project-Zero-Point"
+  },
+  {
+    "day": 439,
+    "name": "438-Yes-No-Maybe-Radio",
+    "path": "438-Yes-No-Maybe-Radio"
+  },
+  {
+    "day": 440,
+    "name": "439-Box-Flow-System",
+    "path": "439-Box-Flow-System"
+  },
+  {
+    "day": 441,
+    "name": "440-Button-Copy-Transitions",
+    "path": "440-Button-Copy-Transitions"
+  },
+  {
+    "day": 442,
+    "name": "441-Cosmos-In-Motion-A-3d-Particle-Study",
+    "path": "441-Cosmos-In-Motion-A-3d-Particle-Study"
+  },
+  {
+    "day": 443,
+    "name": "443-Netflix-80s",
+    "path": "443-Netflix-80s"
+  },
+  {
+    "day": 444,
+    "name": "444-Organic-Background-Three-Js",
+    "path": "444-Organic-Background-Three-Js"
+  },
+  {
+    "day": 445,
+    "name": "445-Pill-Toggle-Cpc-True-False",
+    "path": "445-Pill-Toggle-Cpc-True-False"
+  },
+  {
+    "day": 446,
+    "name": "446-Rotation-Aware-Drop-Shadow-With-Sin-And-Cos",
+    "path": "446-Rotation-Aware-Drop-Shadow-With-Sin-And-Cos"
+  },
+  {
+    "day": 447,
+    "name": "447-Smoke-Ring",
+    "path": "447-Smoke-Ring"
+  },
+  {
+    "day": 448,
+    "name": "448-Snake-Volume-Slider",
+    "path": "448-Snake-Volume-Slider"
+  },
+  {
+    "day": 449,
+    "name": "449-True-False-Checkbox",
+    "path": "449-True-False-Checkbox"
+  },
+  {
+    "day": 450,
+    "name": "450-Before-After-Challenge-Day-Night-Toggle",
+    "path": "450-Before-After-Challenge-Day-Night-Toggle"
+  },
+  {
+    "day": 451,
+    "name": "451-Color-Mixology-Mix-Or-Blend-Colors",
+    "path": "451-Color-Mixology-Mix-Or-Blend-Colors"
+  },
+  {
+    "day": 452,
+    "name": "452-Crossroad-Opposite-Directions",
+    "path": "452-Crossroad-Opposite-Directions"
+  },
+  {
+    "day": 453,
+    "name": "453-Dotted-Image-Filters",
+    "path": "453-Dotted-Image-Filters"
+  },
+  {
+    "day": 454,
+    "name": "454-Emotional-Color-Palettes",
+    "path": "454-Emotional-Color-Palettes"
+  },
+  {
+    "day": 455,
+    "name": "455-Glitch-Aurora-Glass-Scramble",
+    "path": "455-Glitch-Aurora-Glass-Scramble"
+  },
+  {
+    "day": 456,
+    "name": "456-Oklch-Color-Architecture",
+    "path": "456-Oklch-Color-Architecture"
+  },
+  {
+    "day": 457,
+    "name": "457-Oklch-Gradient-Mesh-Interactive-Playground",
+    "path": "457-Oklch-Gradient-Mesh-Interactive-Playground"
+  },
+  {
+    "day": 458,
+    "name": "458-Opposites-Direction-Staichi",
+    "path": "458-Opposites-Direction-Staichi"
+  },
+  {
+    "day": 459,
+    "name": "459-Shape-Wave",
+    "path": "459-Shape-Wave"
+  },
+  {
+    "day": 460,
+    "name": "460-3d-Qr-Code-Three-Js",
+    "path": "460-3d-Qr-Code-Three-Js"
+  },
+  {
+    "day": 461,
+    "name": "461-5-Bands-With-Opposite-Scroll-Directions",
+    "path": "461-5-Bands-With-Opposite-Scroll-Directions"
+  },
+  {
+    "day": 462,
+    "name": "462-Css-Onlymorph-Effect",
+    "path": "462-Css-Onlymorph-Effect"
+  },
+  {
+    "day": 463,
+    "name": "463-Fire-Water-Opposite-Flows",
+    "path": "463-Fire-Water-Opposite-Flows"
+  },
+  {
+    "day": 464,
+    "name": "464-Frosted-Glass-Profile-Card-Ui",
+    "path": "464-Frosted-Glass-Profile-Card-Ui"
+  },
+  {
+    "day": 465,
+    "name": "465-Geeko-Swaying",
+    "path": "465-Geeko-Swaying"
+  },
+  {
+    "day": 466,
+    "name": "466-Magnetic-Attraction-Drag-And-Drop",
+    "path": "466-Magnetic-Attraction-Drag-And-Drop"
+  },
+  {
+    "day": 467,
+    "name": "467-Neon-Iridescent-Ribbon-Using-P5",
+    "path": "467-Neon-Iridescent-Ribbon-Using-P5"
+  },
+  {
+    "day": 468,
+    "name": "468-Opposite-Directions",
+    "path": "468-Opposite-Directions"
+  },
+  {
+    "day": 469,
+    "name": "469-Robotsonly-Datingreverse-Captcha",
+    "path": "469-Robotsonly-Datingreverse-Captcha"
+  },
+  {
+    "day": 470,
+    "name": "470-Single-Geometry-Merged",
+    "path": "470-Single-Geometry-Merged"
+  },
+  {
+    "day": 471,
+    "name": "471-Swiper-Js-Carousel-With-Progress-Animations",
+    "path": "471-Swiper-Js-Carousel-With-Progress-Animations"
+  },
+  {
+    "day": 472,
+    "name": "472-Truth-Machine",
+    "path": "472-Truth-Machine"
+  },
+  {
+    "day": 473,
+    "name": "473-Verity-Engine",
+    "path": "473-Verity-Engine"
+  },
+  {
+    "day": 474,
+    "name": "474-Animated-Filter-Options",
+    "path": "474-Animated-Filter-Options"
+  },
+  {
+    "day": 475,
+    "name": "475-Ascii-Radial-Wave-Text-Effect",
+    "path": "475-Ascii-Radial-Wave-Text-Effect"
+  },
+  {
+    "day": 476,
+    "name": "476-Avatar-Transition",
+    "path": "476-Avatar-Transition"
+  },
+  {
+    "day": 477,
+    "name": "477-Bauhaus-Countdown",
+    "path": "477-Bauhaus-Countdown"
+  },
+  {
+    "day": 478,
+    "name": "478-Cmd-Z-Keyboard",
+    "path": "478-Cmd-Z-Keyboard"
+  },
+  {
+    "day": 479,
+    "name": "479-Direction-Aware-Hover-With-Modern-Css",
+    "path": "479-Direction-Aware-Hover-With-Modern-Css"
+  },
+  {
+    "day": 480,
+    "name": "480-Dithering-Studio",
+    "path": "480-Dithering-Studio"
+  },
+  {
+    "day": 481,
+    "name": "481-Flip-The-Switch-Light-The-Bulb",
+    "path": "481-Flip-The-Switch-Light-The-Bulb"
+  },
+  {
+    "day": 482,
+    "name": "482-Genai-Tech-Stack-Pyramid",
+    "path": "482-Genai-Tech-Stack-Pyramid"
+  },
+  {
+    "day": 483,
+    "name": "483-Glassy-Style-Nav",
+    "path": "483-Glassy-Style-Nav"
+  },
+  {
+    "day": 484,
+    "name": "484-Golden-Girls-Political-Compass-Silliness",
+    "path": "484-Golden-Girls-Political-Compass-Silliness"
+  },
+  {
+    "day": 485,
+    "name": "485-Liquid-Metal-In-Forms-Three-Js",
+    "path": "485-Liquid-Metal-In-Forms-Three-Js"
+  },
+  {
+    "day": 486,
+    "name": "486-Pattern-Over-Pixels-Effect",
+    "path": "486-Pattern-Over-Pixels-Effect"
+  },
+  {
+    "day": 487,
+    "name": "487-Pixel-Alchemy",
+    "path": "487-Pixel-Alchemy"
+  },
+  {
+    "day": 488,
+    "name": "488-Postage-Stamp",
+    "path": "488-Postage-Stamp"
+  },
+  {
+    "day": 489,
+    "name": "489-Reorder-Cards",
+    "path": "489-Reorder-Cards"
+  },
+  {
+    "day": 490,
+    "name": "490-Skills-Keychain-Three-Js-Cannon-Js",
+    "path": "490-Skills-Keychain-Three-Js-Cannon-Js"
+  },
+  {
+    "day": 491,
+    "name": "491-Animated-404-Caveman",
+    "path": "491-Animated-404-Caveman"
+  },
+  {
+    "day": 492,
+    "name": "492-Taped-Paper-Notes",
+    "path": "492-Taped-Paper-Notes"
+  },
+  {
+    "day": 493,
+    "name": "493-Text-Fill-On-Scroll-With-Gsap-Scroll-Trigger",
+    "path": "493-Text-Fill-On-Scroll-With-Gsap-Scroll-Trigger"
+  },
+  {
+    "day": 494,
+    "name": "494-3d-Image-Carousel-Animation",
+    "path": "494-3d-Image-Carousel-Animation"
+  },
+  {
+    "day": 495,
+    "name": "495-Apple-Logo-Style",
+    "path": "495-Apple-Logo-Style"
+  },
+  {
+    "day": 496,
+    "name": "496-Elastic-Responsive-Accordion",
+    "path": "496-Elastic-Responsive-Accordion"
+  },
+  {
+    "day": 497,
+    "name": "497-Goldsvg-Filter-Editable",
+    "path": "497-Goldsvg-Filter-Editable"
+  },
+  {
+    "day": 498,
+    "name": "498-Nav-Icons-Using-Appearance-Base-Select",
+    "path": "498-Nav-Icons-Using-Appearance-Base-Select"
+  },
+  {
+    "day": 499,
+    "name": "499-Pixels-As-Frequencies-Three-Js",
+    "path": "499-Pixels-As-Frequencies-Three-Js"
+  },
+  {
+    "day": 500,
+    "name": "500-Trails-In-Spiral-Three-Js",
+    "path": "500-Trails-In-Spiral-Three-Js"
+  }
+]
