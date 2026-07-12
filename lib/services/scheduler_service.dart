@@ -108,4 +108,45 @@ class SchedulerService {
     
     return _random.nextInt(4) + 2;
   }
+
+  List<DateTime> calculateScheduledTimesForDay({
+    required int commitsCount,
+    required TimeOfDay start,
+    required TimeOfDay end,
+    DateTime? relativeTo,
+  }) {
+    final baseDate = relativeTo ?? DateTime.now();
+    final List<DateTime> slots = [];
+    if (commitsCount <= 0) return slots;
+
+    final startDt = DateTime(baseDate.year, baseDate.month, baseDate.day, start.hour, start.minute);
+    var endDt = DateTime(baseDate.year, baseDate.month, baseDate.day, end.hour, end.minute);
+
+    if (startDt.isAfter(endDt) || startDt.isAtSameMomentAs(endDt)) {
+      endDt = endDt.add(const Duration(days: 1));
+    }
+
+    final totalMinutes = endDt.difference(startDt).inMinutes;
+    if (totalMinutes <= 0) return slots;
+
+    if (commitsCount == 1) {
+      slots.add(startDt.add(Duration(minutes: totalMinutes ~/ 2)));
+    } else {
+      final interval = totalMinutes / (commitsCount - 1);
+      for (int i = 0; i < commitsCount; i++) {
+        slots.add(startDt.add(Duration(minutes: (interval * i).round())));
+      }
+    }
+
+    return slots;
+  }
+
+  DateTime? getNextUpcomingSlot(List<DateTime> slots, DateTime now) {
+    for (var slot in slots) {
+      if (slot.isAfter(now)) {
+        return slot;
+      }
+    }
+    return null;
+  }
 }

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
@@ -122,6 +123,25 @@ class AppProvider extends ChangeNotifier {
   BehaviorProfile get behaviorProfile => _behaviorProfile;
   Map<String, int> get localSimulatedHistory => _localSimulatedHistory;
 
+  // Future Graph Planner Configurations
+  bool _isPlanActive = false;
+  DateTime? _planStartTime;
+  DateTime? _planEndTime;
+  int _planDays = 0;
+  int _planCommitsPerDay = 0;
+  int _planCompletedCommits = 0;
+  DateTime? _nextScheduledCommitTime;
+  Timer? _planTimer;
+  Timer? _countdownTimer;
+
+  bool get isPlanActive => _isPlanActive;
+  DateTime? get planStartTime => _planStartTime;
+  DateTime? get planEndTime => _planEndTime;
+  int get planDays => _planDays;
+  int get planCommitsPerDay => _planCommitsPerDay;
+  int get planCompletedCommits => _planCompletedCommits;
+  DateTime? get nextScheduledCommitTime => _nextScheduledCommitTime;
+
   String get tokenExpiryString {
     if (_tokenExpiry == null) return 'Never';
     return DateFormat('yyyy-MM-dd HH:mm').format(_tokenExpiry!.toLocal());
@@ -240,6 +260,22 @@ class AppProvider extends ChangeNotifier {
     if (historyString != null) {
       final decoded = jsonDecode(historyString) as Map<dynamic, dynamic>;
       _localSimulatedHistory = decoded.cast<String, int>();
+    }
+
+    // Load Graph Plan Settings
+    _isPlanActive = prefs.getBool('plan_active') ?? false;
+    final startTimeStr = prefs.getString('plan_start_time');
+    _planStartTime = (startTimeStr != null && startTimeStr.isNotEmpty) ? DateTime.parse(startTimeStr) : null;
+    final endTimeStr = prefs.getString('plan_end_time');
+    _planEndTime = (endTimeStr != null && endTimeStr.isNotEmpty) ? DateTime.parse(endTimeStr) : null;
+    _planDays = prefs.getInt('plan_days') ?? 0;
+    _planCommitsPerDay = prefs.getInt('plan_commits_per_day') ?? 0;
+    _planCompletedCommits = prefs.getInt('plan_completed_commits') ?? 0;
+    final nextCommitStr = prefs.getString('plan_next_commit_time');
+    _nextScheduledCommitTime = (nextCommitStr != null && nextCommitStr.isNotEmpty) ? DateTime.parse(nextCommitStr) : null;
+
+    if (_isPlanActive) {
+      _startPlanScheduler();
     }
     
     // Load Premium Settings
@@ -883,5 +919,158 @@ OUTPUT ONLY THE VIRGIN CODE. ZERO PLACEHOLDERS.''';
     }
     
     notifyListeners();
+  }
+
+  // Future Graph Planner Scheduler Logic
+  Future<void> startGraphPlan(int days, int commitsPerDay) async {
+    _isPlanActive = true;
+    _planStartTime = DateTime.now();
+    _planEndTime = _planStartTime!.add(Duration(days: days));
+    _planDays = days;
+    _planCommitsPerDay = commitsPerDay;
+    _planCompletedCommits = 0;
+    
+    _calculateNextScheduledCommit();
+    await _savePlanState();
+    _startPlanScheduler();
+    notifyListeners();
+  }
+  
+  Future<void> cancelGraphPlan() async {
+    _isPlanActive = false;
+    _planStartTime = null;
+    _planEndTime = null;
+    _planDays = 0;
+    _planCommitsPerDay = 0;
+    _planCompletedCommits = 0;
+    _nextScheduledCommitTime = null;
+    
+    _planTimer?.cancel();
+    _countdownTimer?.cancel();
+    await _savePlanState();
+    notifyListeners();
+  }
+
+  void _calculateNextScheduledCommit() {
+    if (!_isPlanActive) return;
+    
+    final now = DateTime.now();
+    final todaySlots = _scheduler.calculateScheduledTimesForDay(
+      commitsCount: _planCommitsPerDay,
+      start: _startTime,
+      end: _endTime,
+      relativeTo: now,
+    );
+
+    var nextSlot = _scheduler.getNextUpcomingSlot(todaySlots, now);
+    
+    if (nextSlot == null) {
+      final tomorrow = now.add(const Duration(days: 1));
+      final tomorrowSlots = _scheduler.calculateScheduledTimesForDay(
+        commitsCount: _planCommitsPerDay,
+        start: _startTime,
+        end: _endTime,
+        relativeTo: tomorrow,
+      );
+      if (tomorrowSlots.isNotEmpty) {
+        nextSlot = tomorrowSlots.first;
+      }
+    }
+    
+    _nextScheduledCommitTime = nextSlot;
+  }
+
+  void _startPlanScheduler() {
+    _planTimer?.cancel();
+    _countdownTimer?.cancel();
+    if (!_isPlanActive || _nextScheduledCommitTime == null) return;
+
+    final now = DateTime.now();
+    final delay = _nextScheduledCommitTime!.difference(now);
+
+    if (delay.isNegative || delay.inSeconds <= 0) {
+      _executePlanCommit();
+    } else {
+      _planTimer = Timer(delay, () {
+        _executePlanCommit();
+      });
+      _startCountdownTimer();
+    }
+  }
+
+  void _startCountdownTimer() {
+    _countdownTimer?.cancel();
+    if (!_isPlanActive) return;
+    _countdownTimer = Timer.periodic(const Duration(seconds: 1), (_) {
+      notifyListeners();
+    });
+  }
+
+  Future<void> _executePlanCommit() async {
+    if (!_isPlanActive) return;
+
+    _logger.log('[Planner] Triggering scheduled commit...', type: LogType.info);
+    
+    if (_token != null && _owner != null && _repo != null) {
+      final path = 'src/graph_plan_sync.txt';
+      final success = await _github.createOrUpdateFile(
+        token: _token!,
+        owner: _owner!,
+        repo: _repo!,
+        path: path,
+        content: 'Graph planner automatic sync at ${DateTime.now().toIso8601String()}',
+        message: 'style: graph filler scheduled update',
+        branch: _targetBranch.isNotEmpty ? _targetBranch : null,
+      );
+      
+      if (success) {
+        _planCompletedCommits++;
+        _completedCommits++;
+        _updateHeatmap();
+        _recordLoc(35);
+        _recordSync(1);
+        _incrementLocalHistoryCount();
+        _logger.log('[Planner] Scheduled commit successfully pushed!', type: LogType.success);
+        
+        NotificationService().showProgressNotification(
+          title: "Graph Planner Commit Succeeded",
+          body: "Completed commit $_planCompletedCommits under your active plan.",
+        );
+      } else {
+        _logger.log('[Planner] Scheduled commit failed. Retrying next slot.', type: LogType.error);
+      }
+    }
+
+    if (_planEndTime != null && DateTime.now().isAfter(_planEndTime!)) {
+      _logger.log('[Planner] Graph Plan finished successfully!', type: LogType.success);
+      NotificationService().showProgressNotification(
+        title: "Graph Planner Finished",
+        body: "Your active graph filler plan has successfully ended.",
+      );
+      await cancelGraphPlan();
+    } else {
+      _calculateNextScheduledCommit();
+      await _savePlanState();
+      _startPlanScheduler();
+      notifyListeners();
+    }
+  }
+
+  Future<void> _savePlanState() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('plan_active', _isPlanActive);
+    await prefs.setString('plan_start_time', _planStartTime?.toIso8601String() ?? '');
+    await prefs.setString('plan_end_time', _planEndTime?.toIso8601String() ?? '');
+    await prefs.setInt('plan_days', _planDays);
+    await prefs.setInt('plan_commits_per_day', _planCommitsPerDay);
+    await prefs.setInt('plan_completed_commits', _planCompletedCommits);
+    await prefs.setString('plan_next_commit_time', _nextScheduledCommitTime?.toIso8601String() ?? '');
+  }
+
+  @override
+  void dispose() {
+    _planTimer?.cancel();
+    _countdownTimer?.cancel();
+    super.dispose();
   }
 }
