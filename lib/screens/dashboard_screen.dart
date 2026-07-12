@@ -15,6 +15,7 @@ import 'analytics_screen.dart';
 
 import 'studio_screen.dart';
 import 'catalog_screen.dart';
+import 'graph_art_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -54,6 +55,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
             icon: const Icon(Icons.rocket_launch_rounded, color: Colors.orangeAccent),
             tooltip: 'AI Studio',
             onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const StudioScreen())),
+          ),
+          IconButton(
+            icon: const Icon(Icons.palette_rounded, color: Colors.greenAccent),
+            tooltip: 'Graph Art',
+            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const GraphArtScreen())),
           ),
           IconButton(
             icon: const Icon(Icons.emoji_events_outlined, color: Colors.amberAccent),

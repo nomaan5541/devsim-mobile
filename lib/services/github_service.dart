@@ -122,6 +122,8 @@ class GitHubService {
     required String content,
     required String message,
     String? branch,
+    String? authorDate,
+    String? committerDate,
   }) async {
     final query = branch != null ? '?ref=$branch' : '';
     final url = Uri.parse('https://api.github.com/repos/$owner/$repo/contents/$path$query');
@@ -144,12 +146,27 @@ class GitHubService {
       sha = data['sha'];
     }
 
-    final body = {
+    final Map<String, dynamic> body = {
       'message': message,
       'content': base64Encode(utf8.encode(content)),
     };
     if (sha != null) body['sha'] = sha;
     if (branch != null) body['branch'] = branch;
+
+    if (authorDate != null) {
+      body['author'] = {
+        'name': 'DevSim-Mobile',
+        'email': 'devsim@example.com',
+        'date': authorDate,
+      };
+    }
+    if (committerDate != null) {
+      body['committer'] = {
+        'name': 'DevSim-Mobile',
+        'email': 'devsim@example.com',
+        'date': committerDate,
+      };
+    }
 
     final putResponse = await http.put(
       url,
