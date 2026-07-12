@@ -7,6 +7,7 @@ import '../services/logger_service.dart';
 import '../models/dev_persona.dart';
 import '../models/commit_record.dart';
 import '../widgets/real_time_graph_widget.dart';
+import '../widgets/analytics_comparison_widget.dart';
 import 'scheduler_setup_screen.dart';
 import 'settings_screen.dart';
 import 'logs_screen.dart';
@@ -91,6 +92,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
               _buildChallengeProgress(context, provider),
               const SizedBox(height: 24),
               _buildChallengeStats(provider),
+              const SizedBox(height: 24),
+              AnalyticsComparisonWidget(
+                localHistory: provider.localSimulatedHistory,
+                githubWeeks: provider.githubContributionsWeeks,
+                currentStreak: provider.currentStreak,
+              ),
               const SizedBox(height: 24),
               _buildPersonaSelection(provider),
               const SizedBox(height: 24),

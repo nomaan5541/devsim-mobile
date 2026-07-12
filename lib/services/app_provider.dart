@@ -14,6 +14,7 @@ import '../models/achievement.dart';
 import '../models/staged_file.dart';
 import '../models/web_project.dart';
 import 'catalog_service.dart';
+import 'notification_service.dart';
 
 class AppProvider extends ChangeNotifier {
   final GitHubService _github = GitHubService();
@@ -108,6 +109,19 @@ class AppProvider extends ChangeNotifier {
   bool _isLoadingContributions = false;
   bool get isLoadingContributions => _isLoadingContributions;
 
+  // Offline Suite Configurations
+  List<String> _reposList = [];
+  String _targetBranch = '';
+  bool _enableAutoPr = false;
+  BehaviorProfile _behaviorProfile = BehaviorProfile.standard;
+  Map<String, int> _localSimulatedHistory = {};
+
+  List<String> get reposList => _reposList;
+  String get targetBranch => _targetBranch;
+  bool get enableAutoPr => _enableAutoPr;
+  BehaviorProfile get behaviorProfile => _behaviorProfile;
+  Map<String, int> get localSimulatedHistory => _localSimulatedHistory;
+
   String get tokenExpiryString {
     if (_tokenExpiry == null) return 'Never';
     return DateFormat('yyyy-MM-dd HH:mm').format(_tokenExpiry!.toLocal());
@@ -118,6 +132,68 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Offline Suite Manipulation Methods
+  Future<void> addTrackedRepo(String repoName) async {
+    final clean = repoName.trim().replaceAll(RegExp(r'\s+'), '-');
+    if (clean.isNotEmpty && !_reposList.contains(clean)) {
+      _reposList.add(clean);
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('tracked_repos', jsonEncode(_reposList));
+      notifyListeners();
+    }
+  }
+
+  Future<void> removeTrackedRepo(String repoName) async {
+    if (_reposList.contains(repoName)) {
+      _reposList.remove(repoName);
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('tracked_repos', jsonEncode(_reposList));
+      if (_repo == repoName) {
+        _repo = _reposList.isNotEmpty ? _reposList.first : null;
+        await prefs.setString('last_repo', _repo ?? '');
+      }
+      notifyListeners();
+    }
+  }
+
+  Future<void> setTargetBranch(String branch) async {
+    _targetBranch = branch.trim();
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('target_branch', _targetBranch);
+    notifyListeners();
+  }
+
+  Future<void> toggleAutoPr(bool enabled) async {
+    _enableAutoPr = enabled;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('enable_auto_pr', enabled);
+    notifyListeners();
+  }
+
+  Future<void> setBehaviorProfile(BehaviorProfile profile) async {
+    _behaviorProfile = profile;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('behavior_profile', profile.index);
+    notifyListeners();
+  }
+
+  Future<void> selectActiveRepo(String repoName) async {
+    if (_reposList.contains(repoName)) {
+      _repo = repoName;
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('last_repo', repoName);
+      notifyListeners();
+    }
+  }
+
+  void _incrementLocalHistoryCount() async {
+    final todayStr = DateFormat('yyyy-MM-dd').format(DateTime.now());
+    _localSimulatedHistory[todayStr] = (_localSimulatedHistory[todayStr] ?? 0) + 1;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('local_simulated_history', jsonEncode(_localSimulatedHistory));
+    notifyListeners();
+  }
+
   double get successRate {
     final total = _completedCommits + _failedCommits;
     if (total == 0) return 100.0;
@@ -125,6 +201,9 @@ class AppProvider extends ChangeNotifier {
   }
 
   Future<void> initialize() async {
+    // Initialize Local Offline Notifications
+    await NotificationService().initialize();
+
     _token = await _github.getToken();
     final expiryStr = await _github.getTokenExpiry();
     if (expiryStr != null) {
@@ -144,6 +223,24 @@ class AppProvider extends ChangeNotifier {
     _isAiEnabled = prefs.getBool('is_ai_enabled') ?? false;
     _owner = prefs.getString('last_owner')?.replaceAll(RegExp(r'\s+'), '-');
     _repo = prefs.getString('last_repo')?.replaceAll(RegExp(r'\s+'), '-');
+
+    // Load Offline Suite Settings
+    final reposListString = prefs.getString('tracked_repos');
+    if (reposListString != null) {
+      final decoded = jsonDecode(reposListString) as List<dynamic>;
+      _reposList = decoded.cast<String>();
+    } else {
+      _reposList = _repo != null && _repo!.isNotEmpty ? [_repo!] : [];
+    }
+    _targetBranch = prefs.getString('target_branch') ?? '';
+    _enableAutoPr = prefs.getBool('enable_auto_pr') ?? false;
+    _behaviorProfile = BehaviorProfile.values[prefs.getInt('behavior_profile') ?? BehaviorProfile.standard.index];
+    
+    final historyString = prefs.getString('local_simulated_history');
+    if (historyString != null) {
+      final decoded = jsonDecode(historyString) as Map<dynamic, dynamic>;
+      _localSimulatedHistory = decoded.cast<String, int>();
+    }
     
     // Load Premium Settings
     _enableProWorkflows = prefs.getBool('enable_pro_workflows') ?? true;
@@ -499,6 +596,13 @@ OUTPUT ONLY THE VIRGIN CODE. ZERO PLACEHOLDERS.''';
       if (actualToRun <= 0) {
         _logger.log('Target goal reached! Pulse complete.', type: LogType.success);
         _isRunning = false;
+        
+        // Offline Progress Notification
+        NotificationService().showProgressNotification(
+          title: "Goal Reached",
+          body: "Successfully pushed target commits to $_repo.",
+        );
+        
         notifyListeners();
         break;
       }
@@ -508,15 +612,16 @@ OUTPUT ONLY THE VIRGIN CODE. ZERO PLACEHOLDERS.''';
         owner: _owner!,
         repo: _repo!,
         commitCount: actualToRun,
-        defaultBranch: defaultBranch,
+        defaultBranch: _targetBranch.isNotEmpty ? _targetBranch : defaultBranch,
         apiKey: _isAiEnabled ? _googleApiKey : null,
-        enableProWorkflows: _enableProWorkflows,
+        enableProWorkflows: _enableAutoPr || _enableProWorkflows,
         persona: _persona,
         onProgress: (done) {
           _completedCommits++;
           _updateHeatmap();
           _recordLoc(35); // Estimated 35 lines per commit
           _recordSync(1); // One more file processed
+          _incrementLocalHistoryCount();
           notifyListeners();
         },
         onCommit: (record) {
@@ -528,7 +633,12 @@ OUTPUT ONLY THE VIRGIN CODE. ZERO PLACEHOLDERS.''';
 
       if (!_isRunning) break;
 
-      final delay = _scheduler.calculateNextDelay(_mode, _startTime, _endTime);
+      final delay = _scheduler.calculateNextDelay(
+        _mode, 
+        _startTime, 
+        _endTime,
+        profile: _behaviorProfile,
+      );
       final delayMsg = delay.inMinutes > 0 
         ? '${delay.inMinutes} minutes' 
         : '${delay.inSeconds} seconds';
@@ -605,8 +715,29 @@ OUTPUT ONLY THE VIRGIN CODE. ZERO PLACEHOLDERS.''';
     final expiryStr = await _github.getTokenExpiry();
     if (expiryStr != null) {
       final expiry = _parseExpiryDate(expiryStr);
-      if (expiry != null && DateTime.now().isAfter(expiry)) {
-        await logout(reason: 'Your GitHub token has expired. Please enter a new token to continue.');
+      if (expiry != null) {
+        final now = DateTime.now();
+        if (now.isAfter(expiry)) {
+          await logout(reason: 'Your GitHub token has expired. Please enter a new token to continue.');
+        } else {
+          final difference = expiry.difference(now);
+          final prefs = await SharedPreferences.getInstance();
+          final lastNotifiedExpiry = prefs.getString('last_notified_expiry') ?? '';
+          
+          String? thresholdKey;
+          if (difference.inHours <= 1) {
+            thresholdKey = '1h';
+          } else if (difference.inDays <= 1) {
+            thresholdKey = '1d';
+          } else if (difference.inDays <= 3) {
+            thresholdKey = '3d';
+          }
+
+          if (thresholdKey != null && lastNotifiedExpiry != thresholdKey) {
+            await prefs.setString('last_notified_expiry', thresholdKey);
+            NotificationService().showExpiryWarning(daysLeft: difference.inDays);
+          }
+        }
       }
     }
   }
