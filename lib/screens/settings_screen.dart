@@ -121,7 +121,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           const SizedBox(height: 64),
           const Center(
             child: Text(
-              'DevSim Mobile v1.2.0 – Premium Edition\nProfessional Activity Intelligence Core',
+              'DevSim Mobile v1.6.0 – Premium Edition\nProfessional Activity Intelligence Core',
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.white24, fontSize: 10),
             ),
