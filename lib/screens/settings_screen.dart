@@ -137,6 +137,52 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
+  void _showPinDialog(BuildContext context, AppProvider provider) {
+    final controller = TextEditingController();
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: const Color(0xFF1E293B),
+        title: const Text('Set Secure PIN', style: TextStyle(color: Colors.white)),
+        content: TextField(
+          controller: controller,
+          obscureText: true,
+          maxLength: 4,
+          keyboardType: TextInputType.number,
+          style: const TextStyle(color: Colors.white, fontSize: 24, letterSpacing: 8),
+          textAlign: TextAlign.center,
+          decoration: const InputDecoration(
+            hintText: 'xxxx',
+            hintStyle: TextStyle(color: Colors.white24),
+            counterText: '',
+            enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.blueAccent)),
+            focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.blueAccent, width: 2)),
+          ),
+        ),
+        actions: [
+          TextButton(
+            child: const Text('Cancel', style: TextStyle(color: Colors.white70)),
+            onPressed: () => Navigator.pop(context),
+          ),
+          TextButton(
+            child: const Text('Save', style: TextStyle(color: Colors.blueAccent, fontWeight: FontWeight.bold)),
+            onPressed: () {
+              final pin = controller.text.trim();
+              if (pin.length == 4) {
+                provider.setAppPin(pin);
+                Navigator.pop(context);
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('PIN must be exactly 4 digits')),
+                );
+              }
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildHeading(String title) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12.0),

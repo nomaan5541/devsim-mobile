@@ -58,6 +58,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final provider = context.watch<AppProvider>();
+    final loginMsg = provider.loginMessage;
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
@@ -102,8 +104,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
               ),
-              final provider = context.watch<AppProvider>();
-              final loginMsg = provider.loginMessage;
 
               if (loginMsg != null) ...[
                 const SizedBox(height: 24),

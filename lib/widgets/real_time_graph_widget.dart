@@ -271,7 +271,6 @@ class RealTimeGraphWidget extends StatelessWidget {
     final count = day['count'] as int? ?? 0;
     return Tooltip(
       message: '$count contributions on ${day['date']}',
-      preferOrientedBubble: false,
       child: _buildSquare(count),
     );
   }
