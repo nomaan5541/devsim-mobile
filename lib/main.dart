@@ -7,6 +7,7 @@ import 'services/session_engine.dart';
 import 'services/logger_service.dart';
 import 'screens/login_screen.dart';
 import 'screens/dashboard_screen.dart';
+import 'screens/lock_screen.dart';
 
 // import 'services/notification_service.dart';
 
@@ -74,7 +75,9 @@ class DevSimApp extends StatelessWidget {
       ),
       home: Consumer<AppProvider>(
         builder: (context, provider, _) {
-          return provider.token == null ? const LoginScreen() : const DashboardScreen();
+          if (provider.token == null) return const LoginScreen();
+          if (provider.isLocked) return const LockScreen();
+          return const DashboardScreen();
         },
       ),
     );

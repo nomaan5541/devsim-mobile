@@ -6,7 +6,7 @@ import '../services/app_provider.dart';
 import '../services/logger_service.dart';
 import '../models/dev_persona.dart';
 import '../models/commit_record.dart';
-import '../widgets/heat_map_widget.dart';
+import '../widgets/real_time_graph_widget.dart';
 import 'scheduler_setup_screen.dart';
 import 'settings_screen.dart';
 import 'logs_screen.dart';
@@ -101,7 +101,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
               _buildAchievements(provider),
               const SizedBox(height: 24),
               _buildGlassCard(
-                child: HeatMapWidget(data: provider.heatmapData),
+                child: RealTimeGraphWidget(
+                  weeks: provider.githubContributionsWeeks,
+                  isLoading: provider.isLoadingContributions,
+                  onRefresh: () => provider.fetchRealTimeGitHubGraph(),
+                ),
               ),
               const SizedBox(height: 24),
               _buildStatsBar(provider),
@@ -442,6 +446,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 Text(
                   isRunning ? 'Targeting: ${provider.repo}' : 'Waiting for pulse parameters',
                   style: const TextStyle(color: Colors.white60, fontSize: 12),
+                ),
+                const SizedBox(height: 6),
+                Row(
+                  children: [
+                    const Icon(Icons.key_outlined, size: 10, color: Colors.white38),
+                    const SizedBox(width: 4),
+                    Text(
+                      'Token Expiry: ${provider.tokenExpiryString}',
+                      style: const TextStyle(color: Colors.white38, fontSize: 10),
+                    ),
+                  ],
                 ),
               ],
             ),

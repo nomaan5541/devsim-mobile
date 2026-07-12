@@ -102,6 +102,36 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
               ),
+              final provider = context.watch<AppProvider>();
+              final loginMsg = provider.loginMessage;
+
+              if (loginMsg != null) ...[
+                const SizedBox(height: 24),
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.redAccent.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: Colors.redAccent.withOpacity(0.2)),
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.warning_amber_rounded, color: Colors.redAccent),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          loginMsg,
+                          style: const TextStyle(color: Colors.redAccent, fontSize: 12, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.close, color: Colors.white60, size: 16),
+                        onPressed: () => context.read<AppProvider>().clearLoginMessage(),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
               const SizedBox(height: 48),
 
               // Token Field
@@ -109,6 +139,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 controller: _tokenController,
                 obscureText: true,
                 enabled: !_isLoading,
+                onChanged: (_) {
+                  if (context.read<AppProvider>().loginMessage != null) {
+                    context.read<AppProvider>().clearLoginMessage();
+                  }
+                },
                 decoration: InputDecoration(
                   labelText: 'GitHub Personal Access Token',
                   hintText: 'ghp_...',

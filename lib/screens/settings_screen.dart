@@ -76,6 +76,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
           _buildSwitchTile('Active Hours Enforcement', 'Simulate human downtime patterns', true, (v) {}),
           _buildSwitchTile('Contextual Delays', 'More advanced human timing', true, (v) {}),
           const SizedBox(height: 32),
+          _buildHeading('App Privacy'),
+          _buildSwitchTile(
+            'Secure PIN Lock', 
+            'Protect your streak with a 4-digit PIN', 
+            provider.appPin != null,
+            (v) {
+              if (v) {
+                _showPinDialog(context, provider);
+              } else {
+                provider.setAppPin(null);
+              }
+            },
+          ),
+          const SizedBox(height: 32),
           _buildHeading('Account Control'),
           ListTile(
             title: const Text('Synchronize Repository'),

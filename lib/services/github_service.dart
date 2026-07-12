@@ -12,9 +12,22 @@ class GitHubService {
   final LoggerService _logger = LoggerService();
 
   static const String _tokenKey = 'github_pat';
+  static const String _expiryKey = 'github_pat_expiry';
 
   Future<void> saveToken(String token) async {
     await _storage.write(key: _tokenKey, value: token);
+  }
+
+  Future<void> saveTokenExpiry(String? expiry) async {
+    if (expiry == null) {
+      await _storage.delete(key: _expiryKey);
+    } else {
+      await _storage.write(key: _expiryKey, value: expiry);
+    }
+  }
+
+  Future<String?> getTokenExpiry() async {
+    return await _storage.read(key: _expiryKey);
   }
 
   Future<String?> getToken() async {
@@ -31,7 +44,13 @@ class GitHubService {
           'User-Agent': 'DevSim-Mobile-App',
         },
       ).timeout(const Duration(seconds: 10));
-      return response.statusCode == 200;
+      
+      if (response.statusCode == 200) {
+        final expiry = response.headers['github-authentication-token-expiration'];
+        await saveTokenExpiry(expiry);
+        return true;
+      }
+      return false;
     } catch (e) {
       _logger.log('Token validation error: $e', type: LogType.error);
       return false;
@@ -309,6 +328,56 @@ class GitHubService {
       if (data is List) {
         return data.cast<Map<String, dynamic>>();
       }
+    }
+    return null;
+  }
+
+  Future<List<dynamic>?> getContributionCalendar(String token) async {
+    try {
+      final response = await http.post(
+        Uri.parse('https://api.github.com/graphql'),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+          'User-Agent': 'DevSim-Mobile-App',
+        },
+        body: jsonEncode({
+          'query': '''
+            query {
+              viewer {
+                contributionsCollection {
+                  contributionCalendar {
+                    totalContributions
+                    weeks {
+                      contributionDays {
+                        contributionCount
+                        date
+                        color
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          '''
+        }),
+      ).timeout(const Duration(seconds: 10));
+
+      if (response.statusCode == 200) {
+        final body = jsonDecode(response.body);
+        if (body['errors'] != null) {
+          _logger.log('GraphQL errors: ${body['errors']}', type: LogType.error);
+          return null;
+        }
+        final calendar = body['data']?['viewer']?['contributionsCollection']?['contributionCalendar'];
+        if (calendar != null) {
+          return calendar['weeks'] as List<dynamic>?;
+        }
+      } else {
+        _logger.log('Failed to fetch GraphQL contributions (${response.statusCode}): ${response.body}', type: LogType.error);
+      }
+    } catch (e) {
+      _logger.log('Error fetching contribution calendar: $e', type: LogType.error);
     }
     return null;
   }

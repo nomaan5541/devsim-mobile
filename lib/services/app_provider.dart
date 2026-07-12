@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/intl.dart';
 import 'github_service.dart';
 import 'logger_service.dart';
 import 'scheduler_service.dart';
@@ -55,6 +56,8 @@ class AppProvider extends ChangeNotifier {
   List<Achievement> _achievements = [];
   List<String> _dailyJournal = [];
   List<String> _liveLogs = [];
+  String? _appPin;
+  bool _isLocked = false;
   bool _isCatalogLoaded = false;
 
   // AI Settings
@@ -90,8 +93,30 @@ class AppProvider extends ChangeNotifier {
   List<Achievement> get achievements => List.unmodifiable(_achievements);
   List<String> get dailyJournal => List.unmodifiable(_dailyJournal);
   List<String> get liveLogs => List.unmodifiable(_liveLogs);
+  String? get appPin => _appPin;
+  bool get isLocked => _isLocked;
   List<WebProject> get catalogProjects => _catalog.projects;
   bool get isCatalogLoaded => _isCatalogLoaded;
+
+  DateTime? _tokenExpiry;
+  DateTime? get tokenExpiry => _tokenExpiry;
+  String? _loginMessage;
+  String? get loginMessage => _loginMessage;
+
+  List<List<Map<String, dynamic>>>? _githubContributionsWeeks;
+  List<List<Map<String, dynamic>>>? get githubContributionsWeeks => _githubContributionsWeeks;
+  bool _isLoadingContributions = false;
+  bool get isLoadingContributions => _isLoadingContributions;
+
+  String get tokenExpiryString {
+    if (_tokenExpiry == null) return 'Never';
+    return DateFormat('yyyy-MM-dd HH:mm').format(_tokenExpiry!.toLocal());
+  }
+
+  void clearLoginMessage() {
+    _loginMessage = null;
+    notifyListeners();
+  }
 
   double get successRate {
     final total = _completedCommits + _failedCommits;
@@ -101,6 +126,19 @@ class AppProvider extends ChangeNotifier {
 
   Future<void> initialize() async {
     _token = await _github.getToken();
+    final expiryStr = await _github.getTokenExpiry();
+    if (expiryStr != null) {
+      _tokenExpiry = _parseExpiryDate(expiryStr);
+    } else {
+      _tokenExpiry = null;
+    }
+
+    if (_token != null && _tokenExpiry != null) {
+      if (DateTime.now().isAfter(_tokenExpiry!)) {
+        await logout(reason: 'Your GitHub token has expired. Please connect a new token.');
+      }
+    }
+
     final prefs = await SharedPreferences.getInstance();
     _googleApiKey = prefs.getString('google_api_key');
     _isAiEnabled = prefs.getBool('is_ai_enabled') ?? false;
@@ -138,7 +176,15 @@ class AppProvider extends ChangeNotifier {
     _challengeDay = prefs.getInt('challenge_day') ?? 0;
     _currentStreak = prefs.getInt('current_streak') ?? 0;
     _persona = DevPersona.values[prefs.getInt('persona_index') ?? 0];
+    _appPin = prefs.getString('app_pin');
+    _isLocked = _appPin != null;
     _loadAchievements();
+
+    if (_token != null && (_tokenExpiry == null || DateTime.now().isBefore(_tokenExpiry!))) {
+      // Fetch actual GitHub contributions calendar
+      fetchRealTimeGitHubGraph();
+    }
+
     notifyListeners();
   }
 
@@ -162,6 +208,25 @@ class AppProvider extends ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt('persona_index', p.index);
     notifyListeners();
+  }
+
+  Future<void> setAppPin(String? pin) async {
+    _appPin = pin;
+    _isLocked = pin != null;
+    final prefs = await SharedPreferences.getInstance();
+    if (pin == null) {
+      await prefs.remove('app_pin');
+    } else {
+      await prefs.setString('app_pin', pin);
+    }
+    notifyListeners();
+  }
+
+  void unlock(String pin) {
+    if (_appPin == pin) {
+      _isLocked = false;
+      notifyListeners();
+    }
   }
 
   void _recordLoc(int count) async {
@@ -390,6 +455,9 @@ OUTPUT ONLY THE VIRGIN CODE. ZERO PLACEHOLDERS.''';
   }
 
   Future<void> _startSessionLoop() async {
+    await checkTokenExpiry();
+    if (_token == null) return;
+
     _logger.log('Pre-flight check: Validating repository access...', type: LogType.api);
     String? defaultBranch = await _github.getDefaultBranch(_token!, _owner!, _repo!);
     
@@ -415,6 +483,7 @@ OUTPUT ONLY THE VIRGIN CODE. ZERO PLACEHOLDERS.''';
     _logger.log('Sync Successful. Default branch: $defaultBranch', type: LogType.success);
 
     while (_isRunning) {
+      await checkTokenExpiry();
       if (_token == null || _owner == null || _repo == null) break;
 
       // Calculate how many commits to run in this specific pulse session
@@ -470,11 +539,19 @@ OUTPUT ONLY THE VIRGIN CODE. ZERO PLACEHOLDERS.''';
 
   Future<bool> login(String token) async {
     try {
+      _loginMessage = null;
       final success = await _github.validateToken(token);
       if (success) {
         _token = token;
         await _github.saveToken(token);
         
+        final expiryStr = await _github.getTokenExpiry();
+        if (expiryStr != null) {
+          _tokenExpiry = _parseExpiryDate(expiryStr);
+        } else {
+          _tokenExpiry = null;
+        }
+
         final user = await _github.getCurrentUser(token);
         if (user != null) {
           _owner = user['login'];
@@ -482,12 +559,90 @@ OUTPUT ONLY THE VIRGIN CODE. ZERO PLACEHOLDERS.''';
           await prefs.setString('last_owner', _owner!);
           _logger.log('Auth successful. Identity: $_owner', type: LogType.success);
         }
+        
+        // Load the actual real-time GitHub graph data
+        fetchRealTimeGitHubGraph();
+        
         notifyListeners();
       }
       return success;
     } catch (e) {
       _logger.log('Login error: $e', type: LogType.error);
       return false;
+    }
+  }
+
+  Future<void> logout({String? reason}) async {
+    _token = null;
+    _owner = null;
+    _repo = null;
+    _tokenExpiry = null;
+    _githubContributionsWeeks = null;
+    if (_isRunning) {
+      _isRunning = false;
+    }
+    await _github.saveToken('');
+    await _github.saveTokenExpiry(null);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('last_owner');
+    await prefs.remove('last_repo');
+    _loginMessage = reason;
+    _logger.log('Logged out. Reason: ${reason ?? "User initiated"}', type: LogType.warning);
+    notifyListeners();
+  }
+
+  DateTime? _parseExpiryDate(String expiryStr) {
+    try {
+      final cleaned = expiryStr.replaceAll(' UTC', '').trim();
+      return DateTime.parse(cleaned);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<void> checkTokenExpiry() async {
+    if (_token == null) return;
+    final expiryStr = await _github.getTokenExpiry();
+    if (expiryStr != null) {
+      final expiry = _parseExpiryDate(expiryStr);
+      if (expiry != null && DateTime.now().isAfter(expiry)) {
+        await logout(reason: 'Your GitHub token has expired. Please enter a new token to continue.');
+      }
+    }
+  }
+
+  Future<void> fetchRealTimeGitHubGraph() async {
+    if (_token == null) return;
+    
+    await checkTokenExpiry();
+    if (_token == null) return;
+
+    _isLoadingContributions = true;
+    notifyListeners();
+
+    try {
+      final weeksData = await _github.getContributionCalendar(_token!);
+      if (weeksData != null) {
+        final List<List<Map<String, dynamic>>> parsedWeeks = [];
+        for (var week in weeksData) {
+          final contributionDays = week['contributionDays'] as List<dynamic>;
+          final List<Map<String, dynamic>> parsedDays = [];
+          for (var day in contributionDays) {
+            parsedDays.add({
+              'count': day['contributionCount'] as int,
+              'date': day['date'] as String,
+              'color': day['color'] as String,
+            });
+          }
+          parsedWeeks.add(parsedDays);
+        }
+        _githubContributionsWeeks = parsedWeeks;
+      }
+    } catch (e) {
+      _logger.log('Error parsing contribution calendar: $e', type: LogType.error);
+    } finally {
+      _isLoadingContributions = false;
+      notifyListeners();
     }
   }
 
